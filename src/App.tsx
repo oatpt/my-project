@@ -20,6 +20,7 @@ function App() {
     // For now, we'll use the sample data
     const fetchData = async () => {
       try {
+        productsData.sort((a, b) => a.name.localeCompare(b.name));
         setProducts(productsData);
         setLoading(false);
       } catch (error) {
