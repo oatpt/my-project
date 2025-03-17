@@ -1,12 +1,12 @@
 import { webcrypto } from 'crypto';
 
-// Polyfill สำหรับ Web Crypto API
 if (!globalThis.crypto || !globalThis.crypto.getRandomValues) {
-  globalThis.crypto = webcrypto;
+  // ใช้ type-casting เพื่อบอก TypeScript ว่าเราอนุญาตให้แก้ไข globalThis ได้
+  (globalThis as any).crypto = webcrypto;
 }
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,4 +14,4 @@ export default defineConfig({
   server: {
     port: 3000
   }
-})
+});

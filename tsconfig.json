@@ -3,5 +3,9 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    // ... options อื่น ๆ ...
+    "types": ["node", "vite/client"]
+  }
 }
