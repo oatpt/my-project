@@ -1,4 +1,10 @@
-// File: vite.config.ts
+import { webcrypto } from 'crypto';
+
+// Polyfill สำหรับ Web Crypto API
+if (!globalThis.crypto || !globalThis.crypto.getRandomValues) {
+  globalThis.crypto = webcrypto;
+}
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -6,8 +12,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000,
-    // This is important when using React Router with BrowserRouter
-    // It ensures all routes redirect to index.html so React Router can handle them
+    port: 3000
   }
 })
