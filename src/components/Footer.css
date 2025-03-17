@@ -1,0 +1,12 @@
+/* File: src/components/Footer.css */
+.footer {
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 3rem 5%;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }

@@ -1,0 +1,36 @@
+/* File: src/components/ProductSection.css */
+.section {
+    padding: 5rem 5%;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--secondary);
+  }
+
+  
+  .section-title span {
+    font-size: 2.5rem;
+    color: var(--accent-blue);
+  }
+  
+  .products {
+    background-color: var(--light-gray);
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+    color: var(--accent-blue);
+  }

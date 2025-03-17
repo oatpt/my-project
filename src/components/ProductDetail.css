@@ -1,0 +1,102 @@
+/* File: src/components/ProductDetail.css */
+.product-detail {
+  margin-top: 70px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: var(--secondary);
+}
+
+.section-title span {
+    font-size: 2.5rem;
+  color: var(--accent-blue);
+}
+
+.product-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.detail-section {
+  margin-bottom: 2.5rem;
+}
+
+.detail-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-blue);
+}
+
+.detail-section ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.detail-section ul li {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+.additional-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.additional-content {
+  margin-bottom: 2.5rem;
+  background-color: var(--light-gray);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.additional-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-blue);
+}
+
+.additional-content p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back-link:hover {
+  background-color: var(--accent-blue);
+  color: var(--primary);
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--accent-blue);
+}
+.name {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-blue);
+}
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .section-title span {
+    font-size: 2rem;
+  }
+}

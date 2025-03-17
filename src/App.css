@@ -1,0 +1,31 @@
+/* File: src/App.css */
+:root {
+  --primary: #ffffff;
+  --secondary: #000000;
+  --accent-blue: #0047AB;
+  --accent-red: #D22B2B;
+  --light-gray: #f5f5f5;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: "Prompt", sans-serif; 
+}
+
+body { 
+  background-color: var(--primary); 
+  color: var(--secondary); 
+  line-height: 1.6; 
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* We'll use these CSS variables throughout our components */

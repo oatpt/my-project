@@ -1,0 +1,91 @@
+/* File: src/components/ProductCard.css */
+.product-card {
+  background-color: var(--primary);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.product-image {
+  height: 200px;
+  background-color: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.product-info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.product-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-blue);
+}
+
+.product-info p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.product-content {
+  flex-grow: 1;
+}
+
+.product-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: var(--accent-blue);
+  color: var(--primary);
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+  text-align: center;
+  margin-top: auto;
+}
+
+.product-link:hover {
+  background-color: var(--accent-red);
+}
+
+.painpoints-solutions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+  margin-bottom: 1.5rem;
+}
+
+.painpoints, .solutions {
+  margin-bottom: 1rem;
+}
+
+.painpoints h4, .solutions h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-blue);
+}
+
+.painpoints ul, .solutions ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  list-style: disc;
+}
