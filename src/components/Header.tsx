@@ -16,7 +16,7 @@ const Header = () => {
       <nav className="nav">
         <div className="logo">
           <a href="/" onClick={(e) => handleNavClick(e, '/')}>
-            ECLAT <span>CORPORATION</span>
+            <img src="pic/logo-PSSS.jpg" alt="logo" />
           </a>
         </div>
         <ul className="nav-links">

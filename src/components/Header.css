@@ -19,6 +19,7 @@
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--accent-blue);
+    height:3rem;
   }
   
   .logo span {
@@ -28,8 +29,12 @@
   .logo a {
     color: var(--accent-blue);
     text-decoration: none;
+    
   }
-  
+  .logo img {
+    height: 3rem;
+    
+  }
   .nav-links {
     display: flex;
     list-style: none;
@@ -49,7 +54,7 @@
   .nav-links a:hover {
     color: var(--accent-blue);
   }
-  
+
   @media (max-width: 768px) {
     .nav-links {
       display: none;
