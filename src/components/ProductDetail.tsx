@@ -45,6 +45,10 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                 {product.name}
             </h2>
 
+            <div className="price-container">
+                <span className="price-tag">{product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} บาท</span>
+            </div>
+
             <p className="product-description">
                 {product.description}
             </p>

@@ -6,6 +6,7 @@ interface Productlist{
 
 export interface Product {
   id: string;
+  price: number;
   name: string;
   picture: string;
   description: string;
