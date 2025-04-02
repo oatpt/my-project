@@ -20,6 +20,9 @@ const ProductSection = ({ products, loading }: ProductSectionProps) => {
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+          <div>
+            
+          </div>
         </div>
       )}
     </section>

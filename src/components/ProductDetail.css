@@ -11,7 +11,7 @@
 }
 
 .section-title span {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
   color: var(--accent-blue);
 }
 
@@ -128,4 +128,8 @@
   line-height: 1.7;
   margin-bottom: 2rem;
   color: #444;
+}
+
+.product-detail .imageDetail {
+  max-width: 100%;
 }

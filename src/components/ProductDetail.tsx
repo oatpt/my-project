@@ -52,34 +52,40 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
             <p className="product-description">
                 {product.description}
             </p>
-
-            <div className="detail-section">
-                {product.feature.map((feature, index) => (
-                    <div key={index}>
-                        <p className='name'>{feature.name}</p>
-                        <ul>
-                            {feature.list.map((feature, index2) => (
-                                <li key={index2}>{feature}</li>
+            {product.id === '1537eafd-1202-413c-bf11-943710948aa2' ? (<div>
+                <img src={'/pic/product-brief-wd-purple-pro-sata-hdd_Page_1.jpg'} className='imageDetail'/>
+                <img src={'/pic/product-brief-wd-purple-pro-sata-hdd_Page_2.jpg'} className='imageDetail'/>
+            </div>) :
+                (
+                    <div>
+                        <div className="detail-section">
+                            {product.feature.map((feature, index) => (
+                                <div key={index}>
+                                    <p className='name'>{feature.name}</p>
+                                    <ul>
+                                        {feature.list.map((feature, index2) => (
+                                            <li key={index2}>{feature}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
+                        </div>
 
-            <div className="additional-content">
-                {product.technical.map((feature, index) => (
-                    <div key={index}>
-                        <p className='name'>{feature.name}</p>
-                        <ul>
-                            {feature.list.map((feature, index2) => (
-                                <li key={index2}>{feature}</li>
+                        <div className="additional-content">
+                            {product.technical.map((feature, index) => (
+                                <div key={index}>
+                                    <p className='name'>{feature.name}</p>
+                                    <ul>
+                                        {feature.list.map((feature, index2) => (
+                                            <li key={index2}>{feature}</li>
+                                        ))}
+                                    </ul>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     </div>
-                ))}
-
-            </div>
-
+                )
+            }
             <Link to="/" className="back-link">
                 <i className="fas fa-arrow-left"></i> กลับหน้าหลัก
             </Link>
