@@ -8,6 +8,13 @@ interface ProductDetailProps {
     loading: boolean;
 }
 
+/** ดึงนามสกุลไฟล์มาแสดงเป็นป้ายบนปุ่ม เช่น "/files/a/quotation.pdf" -> "PDF" */
+const fileExtension = (path: string): string => {
+    const name = path.split('/').pop() ?? '';
+    const dot = name.lastIndexOf('.');
+    return dot > 0 ? name.slice(dot + 1).toUpperCase() : 'FILE';
+};
+
 const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     const { productId } = useParams<{ productId: string }>();
 
@@ -45,9 +52,27 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                 {product.name}
             </h2>
 
-            <div className="price-container">
-                <span className="price-tag">{product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} บาท</span>
-            </div>
+            {product.attachments && product.attachments.length > 0 && (
+                <div className="attachments">
+                    <h3 className="attachments-title">เอกสารดาวน์โหลด</h3>
+                    <ul className="attachment-list">
+                        {product.attachments.map((attachment) => (
+                            <li key={attachment.file}>
+                                <a
+                                    className="attachment-link"
+                                    href={attachment.file}
+                                    download
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <span className="attachment-ext">{fileExtension(attachment.file)}</span>
+                                    <span className="attachment-name">{attachment.name}</span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
             <p className="product-description">
                 {product.description}

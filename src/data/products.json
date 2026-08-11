@@ -2,8 +2,13 @@
     {
         "id": "102e52f0-7a50-4123-94da-b2556e814ff4",
         "name": "TaxSphere 360° Platform",
-        "price": 5650000,
         "picture": "pic/DALLE_2025-03-17_23.22.11_-_A_futuristic_tax_mapping_project_illustration._The_image_features_a_high-tech_cityscape_with_a_digital_map_overlay_showing_property_tax_zones._A_holog.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/taxsphere-360-platform/quotation.pdf"
+            }
+        ],
         "description": "นวัตกรรมแพลตฟอร์มดิจิทัลสำหรับการบริหารจัดการภาษีท้องถิ่นที่ผสานเทคโนโลยีภูมิสารสนเทศ ปัญญาประดิษฐ์ และระบบฐานข้อมูลขั้นสูง เพื่อเพิ่มประสิทธิภาพการจัดเก็บรายได้และสร้างความโปร่งใสในการบริหารงานท้องถิ่น",
         "feature": [
             {
@@ -42,8 +47,13 @@
     {
         "id": "903e599c-9ad2-453f-957e-f4a01539782b",
         "name": "AeroTax Intelligence System",
-        "price": 1170000,
         "picture": "pic/DALLE_2025-03-18_00.13.57_-_An_innovative_platform_integrating_advanced_aerial_imagery_analysis_with_a_tax_mapping_system._The_image_features_a_high-tech_control_room_with_a_mass.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/aerotax-intelligence-system/quotation.pdf"
+            }
+        ],
         "description": "แพลตฟอร์มนวัตกรรมที่ผสานเทคโนโลยีการวิเคราะห์ภาพถ่ายทางอากาศขั้นสูงเข้ากับระบบแผนที่ภาษี เพื่อเพิ่มประสิทธิภาพการติดตาม วิเคราะห์ และบริหารจัดการข้อมูลทรัพย์สินในเขตพื้นที่การปกครอง ด้วยความแม่นยำและทันสมัย",
         "feature": [
             {
@@ -82,8 +92,13 @@
     {
         "id": "5390c6bd-8010-4986-a875-ccc994a87053",
         "name": "TerrainSphere Pro System",
-        "price": 2760000,
         "picture": "pic/DALLE_2025-03-18_00.55.59_-_A_high-tech_geospatial_platform_for_creating_and_analyzing_3D_digital_elevation_models._The_image_features_a_futuristic_control_room_with_a_large_inte.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/terrainsphere-pro-system/quotation.pdf"
+            }
+        ],
         "description": "แพลตฟอร์มภูมิสารสนเทศขั้นสูงสำหรับการสร้างและวิเคราะห์แบบจำลองความสูงเชิงเลขแบบสามมิติ ที่ผสานเทคโนโลยีการประมวลผลข้อมูลเชิงพื้นที่และปัญญาประดิษฐ์ เพื่อสนับสนุนการวางแผนพัฒนาพื้นที่และการจัดการภัยพิบัติอย่างมีประสิทธิภาพ",
         "feature": [
             {
@@ -121,8 +136,13 @@
     {
         "id": "6b2d84fc-c909-4a7e-9d9f-531d3a32b620",
         "name": "NutriScan Pro Dataset",
-        "price": 1950000,
         "picture": "pic/DALLE_2025-03-18_01.31.46_-_An_advanced_AI-powered_sleep_analysis_and_enhancement_system_using_contactless_sensors._The_image_features_a_futuristic_bedroom_with_an_intelligent_sl.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/nutriscan-pro-dataset/quotation.pdf"
+            }
+        ],
         "description": "ชุดข้อมูลวิเคราะห์คุณค่าทางโภชนาการและส่วนประกอบอาหารที่ครอบคลุมที่สุดในตลาด รวบรวมข้อมูลโภชนาการจากทั่วโลกกว่า 100,000 รายการ พร้อมการวิเคราะห์เชิงลึกด้วยเทคโนโลยีสเปกโทรสโคปีขั้นสูง เหมาะสำหรับนักโภชนาการ ผู้ผลิตอาหาร และนักวิจัยด้านสุขภาพ",
         "feature": [
             {
@@ -160,8 +180,13 @@
     {
         "id": "85e2e56c-4548-4ad0-a66c-94400f72605b",
         "name": "SleepSync AI System",
-        "price": 1950000,
         "picture": "pic/DALLE_2025-03-18_01.32.39_-_A_comprehensive_nutritional_and_food_composition_analysis_dataset_the_most_extensive_in_the_market._The_image_features_a_high-tech_laboratory_with_ad.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/sleepsync-ai-system/quotation.pdf"
+            }
+        ],
         "description": "ระบบวิเคราะห์และปรับปรุงคุณภาพการนอนอัจฉริยะที่ใช้เทคโนโลยี AI และเซ็นเซอร์ไร้สัมผัส เพื่อติดตามวงจรการนอนหลับ ปรับสภาพแวดล้อมให้เหมาะสม และให้คำแนะนำส่วนบุคคลเพื่อการนอนหลับที่มีคุณภาพ โดยไม่ต้องใช้อุปกรณ์สวมใส่ที่รบกวนการนอน",
         "feature": [
             {
@@ -199,8 +224,13 @@
     {
         "id": "291ba4d9-334c-481c-959c-dbaae7a98276",
         "name": "DataFlow Hub",
-        "price": 2300000,
         "picture": "pic/dataflowhub.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/dataflow-hub/quotation.pdf"
+            }
+        ],
         "description": "แพลตฟอร์มแลกเปลี่ยนข้อมูลที่ทันสมัยและปลอดภัย ออกแบบมาเพื่อเชื่อมโยงระบบข้อมูลต่างๆ ขององค์กรให้ทำงานร่วมกันได้อย่างมีประสิทธิภาพ รองรับการค้นหา จัดเก็บ และแลกเปลี่ยนข้อมูลระหว่างหน่วยงานภายในและภายนอกองค์กร",
         "feature": [
             {
@@ -237,8 +267,13 @@
     {
         "id": "2ba3f736-213d-4107-8ee5-2ee1ba36e3af",
         "name": "Vision Board",
-        "price": 2230000,
         "picture": "pic/visionboard.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/vision-board/quotation.pdf"
+            }
+        ],
         "description": "แดชบอร์ดวิเคราะห์ข้อมูลที่ช่วยให้การจัดเก็บ ค้นหา และแสดงผลข้อมูลขององค์กรเป็นไปอย่างมีประสิทธิภาพ รองรับการวิเคราะห์ข้อมูลแบบเรียลไทม์ เชิงสถิติ และสามารถบูรณาการข้อมูลเชิงพื้นที่จากระบบ GIS เพื่อช่วยให้ผู้ใช้งานสามารถตัดสินใจได้อย่างแม่นยำ",
         "feature": [
             {
@@ -273,8 +308,13 @@
     {
         "id": "dd62a34b-6105-4c82-bd1c-63588c32a0dd",
         "name": "TerraMap-G",
-        "price": 2100000,
         "picture": "pic/terramap.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/terramap-g/quotation.pdf"
+            }
+        ],
         "description": "ระบบแผนที่ GIS ที่รองรับการแสดงผลและวิเคราะห์ข้อมูลเชิงพื้นที่จากแหล่งข้อมูลหลากหลาย ทั้งข้อมูลจากเซนเซอร์ IoT และข้อมูลเรียลไทม์ โดยช่วยให้ผู้ใช้สามารถค้นหา วิเคราะห์ และจัดการข้อมูลแผนที่เพื่อการวางแผนและบริหารเมืองได้อย่างมีประสิทธิภาพ รองรับการแสดงผล 3D และสามารถบูรณาการกับเทคโนโลยี IoT และข้อมูลแบบเรียลไทม์",
         "feature": [
             {
@@ -308,8 +348,13 @@
     {
         "id": "ca8a1736-60bd-4eab-af19-3f44657263b4",
         "name": "MetroData Hub",
-        "price": 2500000,
         "picture": "pic/metrodatahub.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/metrodata-hub/quotation.pdf"
+            }
+        ],
         "description": "แพลตฟอร์มศูนย์กลางสำหรับจัดเก็บ บริหาร และวิเคราะห์ข้อมูลเมืองจากแหล่งข้อมูลที่หลากหลาย เช่น ระบบ IoT ระบบจราจรอัจฉริยะ และข้อมูลสิ่งแวดล้อม รองรับการประมวลผลข้อมูลแบบเรียลไทม์และการวิเคราะห์ย้อนหลัง เพื่อช่วยให้การบริหารจัดการเมืองมีประสิทธิภาพสูงสุด",
         "feature": [
             {
@@ -341,8 +386,13 @@
     {
         "id": "c1f7079e-b39c-4cd5-b2a4-2df8d84b08a4",
         "name": "EventAlert",
-        "price": 2350000,
         "picture": "pic/eventalert.png",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/eventalert/quotation.pdf"
+            }
+        ],
         "description": "ระบบแจ้งเตือนและจัดการเหตุการณ์อัจฉริยะ รองรับการตรวจจับ วิเคราะห์ และแจ้งเตือนเหตุการณ์ฉุกเฉินแบบเรียลไทม์",
         "feature": [
             {
@@ -374,8 +424,13 @@
     {
         "id": "7e6d68dd-c7f2-4ce2-b458-fdb395d8d788",
         "name": "CityEngage",
-        "price": 3780000,
         "picture": "pic/cityengage.png",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/cityengage/quotation.pdf"
+            }
+        ],
         "description": "แพลตฟอร์มดิจิทัลสำหรับการบริหารจัดการเมืองที่ใช้เทคโนโลยี GIS และ AI เพื่อเพิ่มประสิทธิภาพการบริหารงานภาครัฐและการให้บริการประชาชน",
         "feature": [
             {
@@ -407,8 +462,13 @@
     {
         "id": "272b712d-7cf6-434c-a01b-496d460dc399",
         "name": "MediaSphere",
-        "price": 2750000,
         "picture": "pic/mediasphere.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/mediasphere/quotation.pdf"
+            }
+        ],
         "description": "ระบบจัดการข้อมูลสื่อมัลติมีเดียที่ออกแบบมาเพื่อให้การจัดเก็บ ค้นหา และบริหารจัดการสื่อขององค์กรเป็นไปอย่างมีประสิทธิภาพและปลอดภัยการจัดการสื่อมัลติมีเดียอย่างมีประสิทธิภาพ",
         "feature": [
             {
@@ -518,8 +578,13 @@
     {
         "id": "06f7c0d9-8a9d-46e6-aea1-8729cf5a076f",
         "name": "MediaSync",
-        "price": 2500000,
         "picture": "pic/mediasync.png",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/mediasync/quotation.pdf"
+            }
+        ],
         "description": "MediaSync รวมฟีเจอร์ค้นหาข้อมูลย้อนหลัง ไทม์ไลน์อัจฉริยะ การเผยแพร่ตามกำหนดเวลา API สำหรับเชื่อมต่อภายนอก การส่งข้อมูลอัตโนมัติสู่โซเชียลมีเดีย การแปลงไฟล์ ระบบคลังสื่อ แดชบอร์ดวิเคราะห์ และความปลอดภัยระดับสูง เพื่อการสื่อสารที่มีประสิทธิภาพ",
         "feature": [
             {
@@ -637,8 +702,13 @@
     {
         "id": "3c2ec664-f826-4ba6-afee-eafc45faf731",
         "name": "MediaStage",
-        "price": 2400000,
         "picture": "pic/mediastage.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/mediastage/quotation.pdf"
+            }
+        ],
         "description": "ระบบบริหารจัดการและนำเสนอข้อมูลอัจฉริยะ ที่มอบประสบการณ์การใช้งานสูงสุด ด้วยเทคโนโลยีล้ำสมัย รองรับการแสดงผลคุณภาพสูง หลายแพลตฟอร์ม เชื่อมต่อคลาวด์ และขยายฟังก์ชันได้อย่างไร้ขีดจำกัด",
         "feature": [
             {
@@ -722,8 +792,13 @@
     {
         "id": "009cb9ce-5863-4198-a2bb-73bf2090a983",
         "name": "Alertlink",
-        "price": 2400000,
         "picture": "pic/alertlink.png",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/alertlink/quotation.pdf"
+            }
+        ],
         "description": "ระบบบริหารจัดการผู้ใช้และการสื่อสารอัจฉริยะ ที่มอบประสิทธิภาพสูงสุด ด้วยการจัดการบัญชี การควบคุมความปลอดภัย การแจ้งเตือนอัจฉริยะ และการติดตามประสิทธิภาพแบบครบวงจร",
         "feature": [
             {
@@ -883,8 +958,13 @@
     {
         "id": "f0c05cd5-221a-45ef-9f70-92a37d01d151",
         "name": "Membership Management",
-        "price": 2230000,
         "picture": "pic/user_management.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/membership-management/quotation.pdf"
+            }
+        ],
         "description": "ระบบจัดการผู้ใช้ที่ครอบคลุมตั้งแต่การสมัครสมาชิก การเข้าสู่ระบบ การยืนยันตัวตน และการบริหารสิทธิ์ของผู้ใช้ โดยรองรับการสมัครผ่านอีเมล หมายเลขโทรศัพท์ และบัญชีโซเชียล พร้อมฟีเจอร์รักษาความปลอดภัยตามมาตรฐาน PDPA",
         "feature": [
             {
@@ -961,8 +1041,13 @@
     {
         "id": "4c919719-a97f-4ba7-9140-1763b2fd0061",
         "name": "Personal Protech",
-        "price": 2700000,
         "picture": "pic/modular_application.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/personal-protech/quotation.pdf"
+            }
+        ],
         "description": "ระบบออกแบบให้สามารถแยกโมดูลการทำงานออกจากกัน ทำให้สามารถเพิ่มหรือปิดการใช้งานฟีเจอร์ต่าง ๆ ได้โดยไม่กระทบกับระบบหลัก รองรับโครงสร้างแบบ Microservices เพื่อความยืดหยุ่นและประสิทธิภาพสูงสุด",
         "feature": [
             {
@@ -1038,8 +1123,13 @@
     {
         "id": "c2e18472-a4c0-46b5-a073-44d693a79cc5",
         "name": "Notification Management",
-        "price": 1750000,
         "picture": "pic/notification.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/notification-management/quotation.pdf"
+            }
+        ],
         "description": "ระบบแจ้งเตือนที่รองรับการส่งข้อความผ่าน Push Notification, Email และ SMS เพื่อให้ผู้ใช้ได้รับข้อมูลที่สำคัญแบบเรียลไทม์ พร้อมระบบตั้งค่าแจ้งเตือนส่วนบุคคล",
         "feature": [
             {
@@ -1115,8 +1205,13 @@
     {
         "id": "6a6ec47d-2eb9-4eaf-879d-220d426c95df",
         "name": "BannerGo",
-        "price": 2350000,
         "picture": "pic/smart_app.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/bannergo/quotation.pdf"
+            }
+        ],
         "description": "แอปพลิเคชันศูนย์กลาง รองรับการทำงานหลายระบบ เช่น ระบบจัดการผู้ใช้ การแจ้งเตือน การวิเคราะห์ข้อมูล และการชำระเงิน โดยมีโครงสร้างแบบ Modular ที่รองรับการพัฒนาและขยายระบบในอนาคต",
         "feature": [
             {
@@ -1212,8 +1307,13 @@
     {
         "id": "75268b92-6e86-4dca-afa1-6db870717ac9",
         "name": "DataGo",
-        "price": 4850000,
         "picture": "pic/data_analytics.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/datago/quotation.pdf"
+            }
+        ],
         "description": "ระบบวิเคราะห์ข้อมูลที่ช่วยให้สามารถติดตามและวิเคราะห์ข้อมูลเชิงลึก รองรับการวิเคราะห์ข้อมูลแบบเรียลไทม์และ Big Data พร้อมใช้ AI และ Machine Learning เพื่อการพยากรณ์และปรับปรุงกระบวนการทำงาน",
         "feature": [
             {
@@ -1299,8 +1399,13 @@
     {
         "id": "fd9c8987-7132-4e0e-af04-db4ff909641a",
         "name": "PayNGo",
-        "price": 3450000,
         "picture": "pic/payment_system.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/payngo/quotation.pdf"
+            }
+        ],
         "description": "ระบบชำระเงินและบริหารจัดการธุรกรรม รองรับการทำรายการออนไลน์ผ่านบัตรเครดิต, Mobile Banking, E-Wallet และรองรับมาตรฐานความปลอดภัยสูงสุด พร้อมระบบติดตามสถานะธุรกรรมและป้องกันการฉ้อโกง",
         "feature": [
             {
@@ -1387,8 +1492,13 @@
     {
         "id": "a7b3b3b4-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
         "name": "War Room Dashboard",
-        "price": 2850000,
         "picture": "pic/war_room.webp",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/war-room-dashboard/quotation.pdf"
+            }
+        ],
         "description": "WARROOM ช่วยยกระดับความพึงพอใจ ด้วยแพลตฟอร์มที่รวมทุกฟังก์ชันไว้ในระบบเดียวและใช้งานง่าย ซึ่งรวบรวมข้อมูลจากทุกระบบ และฐานข้อมูล ทำให้ไม่พลาดการแจ้งเตือนใดๆ ทำให้สามารถวิเคราะห์เหตุการต่าง ๆ ได้อย่างทันท่วงที",
         "feature": [
             {
@@ -1425,8 +1535,13 @@
     {
         "id": "1537eafd-1202-413c-bf11-943710948aa2",
         "name": "WD Purple™ Pro Smart Video Hard Drive",
-        "price": 23540,
         "picture": "pic/product-brief-wd-purple-pro-sata-hdd_Page_10.jpg",
+        "attachments": [
+            {
+                "name": "ใบเสนอราคา",
+                "file": "/files/wd-purple-pro-smart-video-hard-drive/quotation.pdf"
+            }
+        ],
         "description": "WD Purple™ Pro Smart Video Hard Drive เป็นฮาร์ดดิสก์ที่ออกแบบมาเพื่อการบันทึกวิดีโอที่มีความต้องการสูง รองรับการทำงานตลอด 24 ชั่วโมง 7 วันต่อสัปดาห์ และมีความจุสูงถึง 10TB เพื่อให้คุณสามารถบันทึกวิดีโอได้มากขึ้น",
         "feature": [],
         "technical": []

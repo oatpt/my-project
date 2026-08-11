@@ -7,9 +7,8 @@ import Footer from './components/Footer';
 import './App.css';
 import { Product } from './types.ts';
 import productsData from './data/products.json';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProductDetail from './components/ProductDetail.tsx';
-import Quotation from './components/Quotation.tsx';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -45,14 +44,12 @@ function App() {
             </>
           } 
         />
-        <Route 
-          path="/product-details/:productId" 
-          element={<ProductDetail products={products} loading={loading} />} 
+        <Route
+          path="/product-details/:productId"
+          element={<ProductDetail products={products} loading={loading} />}
         />
-         <Route 
-          path="/quotation" 
-          element={<Quotation products={products} loading={loading}  />} 
-        />
+        {/* ลิงก์เก่าอย่าง /quotation ให้กลับหน้าหลักแทนหน้าว่าง */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </Router>

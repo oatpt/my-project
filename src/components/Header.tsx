@@ -25,11 +25,6 @@ const Header = () => {
               หน้าหลัก
             </a>
           </li>
-          <li>
-            <a href="/quotation" onClick={(e) => handleNavClick(e, '/quotation')}>
-              ใบเสนอราคา
-            </a>
-          </li>
         </ul>
       </nav>
     </header>
