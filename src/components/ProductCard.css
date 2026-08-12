@@ -44,6 +44,11 @@
 .product-info p {
   color: #666;
   margin-bottom: 1.5rem;
+  /* คำอธิบายเต็มยาวหลายย่อหน้า บนการ์ดตัดให้เหลือ 4 บรรทัดเพื่อให้การ์ดสูงใกล้กัน */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .product-content {

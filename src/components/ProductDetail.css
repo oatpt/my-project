@@ -1,12 +1,17 @@
 /* File: src/components/ProductDetail.css */
 .product-detail {
   margin-top: 70px;
+  /* จำกัดความกว้างเนื้อหาไว้ ไม่ให้บรรทัดยาวจนสายตาไล่ไม่ทันบนจอกว้าง */
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 2rem;
+  line-height: 1.3;
+  margin-bottom: 2.5rem;
   color: var(--secondary);
 }
 
@@ -17,9 +22,13 @@
 
 .product-description {
   font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: 2rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
   color: #444;
+  /* ย่อหน้าแบบเอกสารไทย เว้นหน้าบรรทัดแรก
+     ไม่ใช้ justify เพราะภาษาไทยมีช่องว่างน้อย พอยืดแล้วช่องไฟห่างไม่สม่ำเสมอ */
+  text-indent: 3em;
+  max-width: 62em;
 }
 
 .detail-section {
@@ -32,23 +41,32 @@
   color: var(--accent-blue);
 }
 
-.detail-section ul {
-  list-style: disc;
-  padding-left: 1.5rem;
-}
-
-.detail-section ul li {
-  margin-bottom: 0.5rem;
-  color: #555;
-}
+.detail-section ul,
 .additional-content ul {
   list-style: disc;
-  padding-left: 1.5rem;
+  /* เยื้องเข้ามาให้เสมอกับย่อหน้าของคำอธิบายด้านบน */
+  padding-left: 3.5em;
+  margin-bottom: 1.75rem;
 }
+
+.detail-section ul li,
+.additional-content ul li {
+  margin-bottom: 0.6rem;
+  line-height: 1.75;
+  color: #555;
+  /* ตัวเลขและหน่วยไม่ควรถูกตัดคนละบรรทัดกับข้อความ */
+  text-wrap: pretty;
+}
+
+.detail-section ul li::marker,
+.additional-content ul li::marker {
+  color: var(--accent-blue);
+}
+
 .additional-content {
   margin-bottom: 2.5rem;
   background-color: var(--light-gray);
-  padding: 2rem;
+  padding: 2rem 2.5rem;
   border-radius: 10px;
 }
 
@@ -86,9 +104,15 @@
   font-size: 1.2rem;
   color: var(--accent-blue);
 }
+/* หัวข้อย่อยอย่าง "จุดเด่น" / "ข้อมูลทางเทคนิค"
+   เดิมตั้งไว้ 2.5rem เท่าชื่อหน้า จึงแย่งความสำคัญกับหัวเรื่องหลัก */
 .name {
-  font-size: 2.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.4;
   margin-bottom: 1rem;
+  padding-left: 0.85rem;
+  border-left: 4px solid var(--accent-blue);
   color: var(--accent-blue);
 }
 @media (max-width: 768px) {
@@ -98,6 +122,24 @@
 
   .section-title span {
     font-size: 2rem;
+  }
+
+  .name {
+    font-size: 1.35rem;
+  }
+
+  /* บนจอแคบ การเยื้อง 3em กินพื้นที่มากเกินไป */
+  .product-description {
+    text-indent: 1.5em;
+  }
+
+  .detail-section ul,
+  .additional-content ul {
+    padding-left: 1.5rem;
+  }
+
+  .additional-content {
+    padding: 1.5rem;
   }
 }
 

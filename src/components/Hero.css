@@ -1,38 +1,43 @@
 /* File: src/components/Hero.css */
 .hero {
-    height: 100vh;
+    /* min-height ไม่ใช่ height เพื่อไม่ให้เนื้อหาล้นออกนอกกรอบบนจอเตี้ย */
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--primary) 60%, var(--light-gray) 100%);
-    padding: 0 5%;
+    padding: 4rem 5%;
     margin-top: 70px;
   }
-  
+
   .hero-content {
+    width: 100%;
     max-width: 1200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
   }
   
   .hero-text {
     flex: 1;
-    padding-right: 3rem;
   }
-  
+
   .hero-text h1 {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.25;
     margin-bottom: 1.5rem;
     color: var(--secondary);
   }
-  
+
   .hero-text h1 span {
     color: var(--accent-blue);
   }
-  
+
   .hero-text p {
     font-size: 1.1rem;
+    /* จำกัดความกว้างบรรทัดไว้ราว 60 ตัวอักษร อ่านง่ายกว่าปล่อยเต็มคอลัมน์ */
+    max-width: 34em;
     margin-bottom: 2rem;
     color: #555;
   }

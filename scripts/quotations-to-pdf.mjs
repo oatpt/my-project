@@ -1,22 +1,25 @@
 // File: scripts/quotations-to-pdf.mjs
 //
-// อ่านใบเสนอราคา .xlsx ใน public/files/_quotations/ แล้วออกเป็น PDF ขนาด A4 ไฟล์ละ 1 ใบ
+// อ่านใบเสนอราคา .xlsx ใน quotations-source/ แล้วออกเป็น PDF ขนาด A4 ไฟล์ละ 1 ใบ
+// ลงไว้ที่ public/files/_quotations/
 //
-// .xlsx คือต้นฉบับที่แก้ราคาได้ ส่วน PDF คือไฟล์ที่ลูกค้าโหลดจากหน้าเว็บ
+// .xlsx คือต้นฉบับที่แก้ราคาได้ อยู่นอก public/ เพราะเป็นไฟล์ทำงาน ไม่ควรให้โหลดจากเว็บ
+// ส่วน PDF คือไฟล์ที่ลูกค้าโหลดจากหน้าเว็บ
 // แก้ราคาใน .xlsx แล้วสั่ง `npm run quotations` เพื่อสร้าง PDF ใหม่
 //
 // ใช้ Chrome ที่ติดตั้งอยู่ในเครื่องเป็นตัวพิมพ์ PDF (ไม่ต้องลง dependency เพิ่ม)
 // ถ้าไม่มี Chrome สคริปต์จะข้ามการสร้าง PDF และเตือน แต่ไม่ทำให้ build พัง
 
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { inflateRawSync } from 'node:zlib';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const quotationsDir = path.join(root, 'public', 'files', '_quotations');
+const sourceDir = path.join(root, 'quotations-source');
+const outputDir = path.join(root, 'public', 'files', '_quotations');
 
 // ---------------------------------------------------------------- อ่าน .xlsx
 
@@ -270,9 +273,9 @@ const chrome = findChrome();
 
 let files;
 try {
-    files = readdirSync(quotationsDir).filter((n) => n.toLowerCase().endsWith('.xlsx'));
+    files = readdirSync(sourceDir).filter((n) => n.toLowerCase().endsWith('.xlsx'));
 } catch {
-    console.log('[quotations] ไม่มีโฟลเดอร์ public/files/_quotations/ — ข้าม');
+    console.log('[quotations] ไม่มีโฟลเดอร์ quotations-source/ — ข้าม');
     process.exit(0);
 }
 
@@ -287,10 +290,12 @@ if (!chrome) {
 
 const tmp = mkdtempSync(path.join(os.tmpdir(), 'quot-html-'));
 try {
+    mkdirSync(outputDir, { recursive: true });
+
     for (const file of files) {
-        const doc = toDocument(readSheet(path.join(quotationsDir, file)));
+        const doc = toDocument(readSheet(path.join(sourceDir, file)));
         const htmlPath = path.join(tmp, file.replace(/\.xlsx$/i, '.html'));
-        const pdfPath = path.join(quotationsDir, file.replace(/\.xlsx$/i, '.pdf'));
+        const pdfPath = path.join(outputDir, file.replace(/\.xlsx$/i, '.pdf'));
 
         const html = renderHtml(doc);
         writeFileSync(htmlPath, html, 'utf8');
