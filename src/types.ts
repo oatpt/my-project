@@ -4,7 +4,10 @@ interface Productlist{
   list: string[];
 }
 
-/** ไฟล์แนบของสินค้า วางไฟล์จริงไว้ใน public/files/<ชื่อโฟลเดอร์สินค้า>/ */
+/**
+ * ไฟล์แนบที่ตั้งชื่อปุ่มเอง หรือชี้ไปไฟล์นอกโฟลเดอร์สินค้า
+ * ปกติไม่ต้องใส่ — ไฟล์ที่วางไว้ใน public/files/<folder>/ ขึ้นเองอยู่แล้ว
+ */
 export interface Attachment {
   /** ชื่อที่แสดงบนปุ่ม เช่น "ใบเสนอราคา", "โบรชัวร์" */
   name: string;
@@ -12,10 +15,32 @@ export interface Attachment {
   file: string;
 }
 
+/** ไฟล์ 1 ไฟล์ที่สคริปต์ scan-files เจอในโฟลเดอร์สินค้า */
+export interface ScannedFile {
+  /** พาธจาก public เช่น "/files/mediasphere/โบรชัวร์/a.pdf" */
+  file: string;
+  /** ชื่อไฟล์พร้อมนามสกุล */
+  name: string;
+  /** ขนาดเป็นไบต์ */
+  size: number;
+}
+
+/** ไฟล์ที่อยู่ในโฟลเดอร์ย่อยเดียวกัน — ชื่อโฟลเดอร์ย่อยกลายเป็นหัวข้อบนหน้าเว็บ */
+export interface AttachmentGroup {
+  /** ชื่อโฟลเดอร์ย่อย, "" คือไฟล์ที่วางไว้ชั้นบนสุดของโฟลเดอร์สินค้า */
+  group: string;
+  files: ScannedFile[];
+}
+
+/** ผลการสำรวจ public/files/ ทั้งหมด คีย์คือชื่อโฟลเดอร์สินค้า */
+export type AttachmentIndex = Record<string, AttachmentGroup[]>;
+
 export interface Product {
   id: string;
   name: string;
   picture: string;
+  /** ชื่อโฟลเดอร์ของสินค้านี้ใน public/files/ — ไฟล์ในนั้นขึ้นหน้าเว็บอัตโนมัติ */
+  folder: string;
   attachments?: Attachment[];
   description: string;
   feature: Productlist[];

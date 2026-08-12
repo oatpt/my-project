@@ -1,6 +1,7 @@
 // File: src/components/ProductDetail.tsx
 import { useParams, Link } from 'react-router-dom';
-import { Product } from '../types';
+import { AttachmentGroup, AttachmentIndex, Product } from '../types';
+import attachmentsData from '../data/attachments.json';
 import './ProductDetail.css';
 
 interface ProductDetailProps {
@@ -8,11 +9,78 @@ interface ProductDetailProps {
     loading: boolean;
 }
 
+/**
+ * ผลการสำรวจ public/files/ ที่สคริปต์ scripts/scan-files.mjs เขียนไว้ตอน build
+ * เว็บนี้ไม่มี server จึงอ่านโฟลเดอร์ตอนผู้ใช้เปิดหน้าไม่ได้ ต้องอ่านไว้ก่อนแล้วฝังมากับหน้าเว็บ
+ */
+const attachmentIndex = attachmentsData as AttachmentIndex;
+
 /** ดึงนามสกุลไฟล์มาแสดงเป็นป้ายบนปุ่ม เช่น "/files/a/quotation.pdf" -> "PDF" */
 const fileExtension = (path: string): string => {
     const name = path.split('/').pop() ?? '';
     const dot = name.lastIndexOf('.');
     return dot > 0 ? name.slice(dot + 1).toUpperCase() : 'FILE';
+};
+
+/** "รายงานประจำปี.pdf" -> "รายงานประจำปี" เพราะป้ายข้างปุ่มบอกชนิดไฟล์อยู่แล้ว */
+const withoutExtension = (name: string): string => {
+    const dot = name.lastIndexOf('.');
+    return dot > 0 ? name.slice(0, dot) : name;
+};
+
+/** ชื่อไฟล์ภาษาไทยหรือมีเว้นวรรค ต้อง encode ก่อนใส่ใน href ไม่งั้นลิงก์พัง */
+const hrefFor = (file: string): string =>
+    /%[0-9a-f]{2}/i.test(file) ? file : encodeURI(file);
+
+const formatSize = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    const units = ['KB', 'MB', 'GB'];
+    let value = bytes / 1024;
+    let unit = 0;
+    while (value >= 1024 && unit < units.length - 1) {
+        value /= 1024;
+        unit += 1;
+    }
+    return `${value < 10 ? value.toFixed(1) : Math.round(value)} ${units[unit]}`;
+};
+
+/**
+ * รวมไฟล์ที่จะให้โหลดของสินค้าหนึ่งชิ้น
+ *
+ * หลักคือไฟล์ที่วางไว้ใน public/files/<folder>/ ขึ้นเองทั้งหมด โดยชื่อโฟลเดอร์ย่อย
+ * กลายเป็นหัวข้อ ส่วน attachments ใน products.json มีไว้เฉพาะ 2 กรณีที่โฟลเดอร์บอกไม่ได้
+ * คือ อยากตั้งชื่อปุ่มเอง กับ ลิงก์ไปไฟล์ที่ไม่ได้อยู่ในเครื่องเรา
+ */
+const buildAttachmentGroups = (product: Product): AttachmentGroup[] => {
+    const scanned = attachmentIndex[product.folder] ?? [];
+    const labels = new Map(
+        (product.attachments ?? []).map((a) => [a.file.toLowerCase(), a.name]),
+    );
+
+    const groups: { group: string; files: { file: string; name: string; size: number }[] }[] =
+        scanned.map((entry) => ({
+            group: entry.group,
+            files: entry.files.map((file) => ({
+                ...file,
+                name: labels.get(file.file.toLowerCase()) ?? withoutExtension(file.name),
+            })),
+        }));
+
+    // รายการที่เขียนไว้เองแต่ไม่มีไฟล์จริงในโฟลเดอร์ เช่นลิงก์ภายนอก ให้ต่อท้ายกลุ่มบนสุด
+    const onDisk = new Set(
+        scanned.flatMap((entry) => entry.files.map((f) => f.file.toLowerCase())),
+    );
+    const extra = (product.attachments ?? [])
+        .filter((a) => !onDisk.has(a.file.toLowerCase()))
+        .map((a) => ({ file: a.file, name: a.name, size: 0 }));
+
+    if (extra.length) {
+        const root = groups.find((g) => g.group === '');
+        if (root) root.files.push(...extra);
+        else groups.unshift({ group: '', files: extra });
+    }
+
+    return groups;
 };
 
 const ProductDetail = ({ products, loading }: ProductDetailProps) => {
@@ -42,6 +110,11 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
         );
     }
 
+    const attachmentGroups = buildAttachmentGroups(product);
+    // ถ้ามีกลุ่มเดียวและไม่ได้แยกโฟลเดอร์ย่อย หัวข้อย่อยจะซ้ำกับ "เอกสารดาวน์โหลด" ข้างบน
+    const showGroupTitles =
+        attachmentGroups.length > 1 || attachmentGroups[0]?.group !== '';
+
     return (
         <section className="section product-detail">
 
@@ -52,25 +125,37 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                 {product.name}
             </h2>
 
-            {product.attachments && product.attachments.length > 0 && (
+            {attachmentGroups.length > 0 && (
                 <div className="attachments">
                     <h3 className="attachments-title">เอกสารดาวน์โหลด</h3>
-                    <ul className="attachment-list">
-                        {product.attachments.map((attachment) => (
-                            <li key={attachment.file}>
-                                <a
-                                    className="attachment-link"
-                                    href={attachment.file}
-                                    download
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    <span className="attachment-ext">{fileExtension(attachment.file)}</span>
-                                    <span className="attachment-name">{attachment.name}</span>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
+                    {attachmentGroups.map((group) => (
+                        <div className="attachment-group" key={group.group || '_root'}>
+                            {showGroupTitles && (
+                                <h4 className="attachment-group-title">
+                                    {group.group ? group.group.split('/').join(' / ') : 'ไฟล์ทั่วไป'}
+                                </h4>
+                            )}
+                            <ul className="attachment-list">
+                                {group.files.map((file) => (
+                                    <li key={file.file}>
+                                        <a
+                                            className="attachment-link"
+                                            href={hrefFor(file.file)}
+                                            download
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <span className="attachment-ext">{fileExtension(file.file)}</span>
+                                            <span className="attachment-name">{file.name}</span>
+                                            {file.size > 0 && (
+                                                <span className="attachment-size">{formatSize(file.size)}</span>
+                                            )}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             )}
 
