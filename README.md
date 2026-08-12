@@ -71,17 +71,29 @@ public/files/mediasphere/
 
 ### ใบเสนอราคาชุด ProTech
 
-`public/files/_quotations/` เก็บใบเสนอราคาแยกตามโครงการ โครงการละ 1 ไฟล์ 1 ชีต:
+`public/files/_quotations/` เก็บใบเสนอราคาแยกตามโครงการ โครงการละ 1 ใบ
+มีทั้ง `.xlsx` (ต้นฉบับที่แก้ราคาได้) และ `.pdf` (ไฟล์ที่ลูกค้าโหลดจากหน้าเว็บ)
 
-| ไฟล์ | ใช้กับสินค้า |
-|---|---|
-| `ใบเสนอราคา_ระบบประชาสัมพันธ์.xlsx` | Central Digital Media Management System, Multimedia Distribution Platform, Public Display Management Platform, Central User & Communication System |
-| `ใบเสนอราคา_Smart Thatoom Super App.xlsx` | IdentiCore, LinkFrame, SignalWave, CivicHub |
-| `ใบเสนอราคา_War Room.xlsx` | Urban Data Management and Analytics Platform |
-| `ใบเสนอราคา_City Data Platform.xlsx` | Central Data Management Platform, Spatial Information Platform, Data Integration Gateway, Data Insight Center |
+| ใบเสนอราคา | รายการ | รวม (บาท) | ใช้กับสินค้า |
+|---|---|---|---|
+| `ใบเสนอราคา_ระบบประชาสัมพันธ์` | 6 | 8,741,000 | Central Digital Media Management System, Multimedia Distribution Platform, Public Display Management Platform, Central User & Communication System |
+| `ใบเสนอราคา_Smart Thatoom Super App` | 6 | 9,525,000 | IdentiCore, LinkFrame, SignalWave, CivicHub |
+| `ใบเสนอราคา_War Room` | 11 | 4,909,000 | Urban Data Management and Analytics Platform |
+| `ใบเสนอราคา_City Data Platform` | 9 | 10,365,000 | Central Data Management Platform, Spatial Information Platform, Data Integration Gateway, Data Insight Center |
 
 โฟลเดอร์นี้ไม่ใช่โฟลเดอร์ของสินค้าตัวไหน จึงไม่ถูกสแกนขึ้นเอง แต่ละสินค้าชี้มาผ่าน
 `attachments` — แก้ราคาที่ไฟล์เดียว สินค้าที่ชี้มาทั้งหมดได้ของใหม่พร้อมกัน
+
+**แก้ราคาแล้วต้องสร้าง PDF ใหม่ด้วย:**
+
+```
+npm run quotations
+```
+
+อ่าน `.xlsx` ทุกไฟล์ในโฟลเดอร์ แล้วพิมพ์เป็น PDF A4 ใบละ 1 หน้าทับของเดิม
+(ใช้ Chrome หรือ Edge ที่ติดตั้งอยู่ในเครื่องเป็นตัวพิมพ์ ถ้าไม่มีจะข้ามไปเฉย ๆ
+ตั้ง `CHROME_PATH` ได้ถ้าติดตั้งไว้ที่อื่น) สคริปต์นี้ไม่ได้ผูกกับ `npm run build`
+เพราะ PDF ที่สร้างแล้วถูก commit ไว้ในโปรเจกต์อยู่แล้ว
 
 ### ไฟล์ไม่ขึ้น
 

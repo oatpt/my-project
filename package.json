@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "scan-files": "node scripts/scan-files.mjs",
+    "quotations": "node scripts/quotations-to-pdf.mjs",
     "predev": "npm run scan-files",
     "dev": "vite",
     "prebuild": "npm run scan-files",
