@@ -1,36 +1,62 @@
 /* File: src/components/ProductSection.css */
 .section {
-    padding: 5rem 5%;
-  }
-  
-  .section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: var(--secondary);
+  padding: 5rem 5%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--secondary);
+}
+
+.section-title span {
+  font-size: 2.5rem;
+  color: var(--accent-blue);
+}
+
+.products {
+  background-color: var(--light-gray);
+}
+
+/* ขีดสั้น ๆ ใต้หัวข้อ ช่วยปิดหัวเรื่องให้จบเป็นก้อน แทนที่จะลอยอยู่เหนือกริด */
+.products .section-title {
+  margin-bottom: 1rem;
+}
+
+.products .section-title::after {
+  content: '';
+  display: block;
+  width: 4.5rem;
+  height: 4px;
+  margin: 1.25rem auto 0;
+  border-radius: 2px;
+  background-color: var(--accent-blue);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2rem;
+  /* กันไม่ให้การ์ดยืดจนกว้างเกินไปบนจอใหญ่ */
+  max-width: 1320px;
+  margin: 3rem auto 0;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: var(--accent-blue);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3.5rem 5%;
   }
 
-  
+  .section-title,
   .section-title span {
-    font-size: 2.5rem;
-    color: var(--accent-blue);
+    font-size: 2rem;
   }
-  
-  .products {
-    background-color: var(--light-gray);
-  }
-  
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    /* max-width: 1200px; */
-    margin: 0 auto;
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 2rem;
-    font-size: 1.2rem;
-    color: var(--accent-blue);
-  }
+}

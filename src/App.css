@@ -14,10 +14,13 @@
   font-family: "Prompt", sans-serif; 
 }
 
-body { 
-  background-color: var(--primary); 
-  color: var(--secondary); 
-  line-height: 1.6; 
+body {
+  background-color: var(--primary);
+  color: var(--secondary);
+  line-height: 1.6;
+  /* คำไทยยาว ๆ ที่ไม่มีช่องว่างคั่น เช่น "เซอร์วิสแอนด์โซลูชั่น" เบราว์เซอร์ตัดบรรทัดไม่ได้
+     บนจอแคบจึงดันหน้าเว็บกว้างเกินจอจนเลื่อนซ้ายขวาได้ — อนุญาตให้ตัดกลางคำเมื่อจำเป็น */
+  overflow-wrap: break-word;
 }
 
 a {
