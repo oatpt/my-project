@@ -40,9 +40,9 @@ public/files/mediasphere/
 
 (`src/data/attachments.json` เป็นไฟล์ที่สร้างอัตโนมัติ ไม่ต้องแก้เอง — แก้ไปก็โดนเขียนทับ)
 
-### อยากตั้งชื่อปุ่มเอง หรือลิงก์ไปไฟล์ข้างนอก
+### อยากตั้งชื่อปุ่มเอง ใช้ไฟล์ร่วมกันหลายสินค้า หรือลิงก์ไปไฟล์ข้างนอก
 
-สองกรณีนี้โฟลเดอร์บอกไม่ได้ ให้เขียนใน `attachments` ของสินค้านั้นใน `products.json`
+สามกรณีนี้โฟลเดอร์บอกไม่ได้ ให้เขียนใน `attachments` ของสินค้านั้นใน `products.json`
 ระบบจะรวมเข้ากับรายการที่สแกนเจอให้เอง
 
 ```jsonc
@@ -54,11 +54,34 @@ public/files/mediasphere/
     "file": "/files/mediasphere/ใบเสนอราคา/ใบเสนอราคา 2568.pdf"
   },
   {
+    // ไฟล์ที่ใช้ร่วมกันหลายสินค้า เก็บไว้ที่เดียว แล้วให้แต่ละสินค้าชี้มา
+    "name": "ใบเสนอราคา (โครงการ Smart Thatoom Super App)",
+    "file": "/files/_quotations/ใบเสนอราคา_Smart Thatoom Super App.xlsx",
+    "group": "ใบเสนอราคา"
+  },
+  {
     "name": "สเปกฉบับเต็ม",
     "file": "https://example.com/spec.pdf"
   }
 ]
 ```
+
+`group` คือหัวข้อที่จะให้ไปอยู่ใต้ ไม่ใส่ก็จะไปอยู่กลุ่ม "ไฟล์ทั่วไป"
+(สำหรับไฟล์ที่วางในโฟลเดอร์ตรง ๆ ไม่ต้องใส่ ระบบใช้ชื่อโฟลเดอร์ย่อยเป็นหัวข้ออยู่แล้ว)
+
+### ใบเสนอราคาชุด ProTech
+
+`public/files/_quotations/` เก็บใบเสนอราคาแยกตามโครงการ โครงการละ 1 ไฟล์ 1 ชีต:
+
+| ไฟล์ | ใช้กับสินค้า |
+|---|---|
+| `ใบเสนอราคา_ระบบประชาสัมพันธ์.xlsx` | Central Digital Media Management System, Multimedia Distribution Platform, Public Display Management Platform, Central User & Communication System |
+| `ใบเสนอราคา_Smart Thatoom Super App.xlsx` | IdentiCore, LinkFrame, SignalWave, CivicHub |
+| `ใบเสนอราคา_War Room.xlsx` | Urban Data Management and Analytics Platform |
+| `ใบเสนอราคา_City Data Platform.xlsx` | Central Data Management Platform, Spatial Information Platform, Data Integration Gateway, Data Insight Center |
+
+โฟลเดอร์นี้ไม่ใช่โฟลเดอร์ของสินค้าตัวไหน จึงไม่ถูกสแกนขึ้นเอง แต่ละสินค้าชี้มาผ่าน
+`attachments` — แก้ราคาที่ไฟล์เดียว สินค้าที่ชี้มาทั้งหมดได้ของใหม่พร้อมกัน
 
 ### ไฟล์ไม่ขึ้น
 

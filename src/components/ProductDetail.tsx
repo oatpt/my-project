@@ -15,6 +15,19 @@ interface ProductDetailProps {
  */
 const attachmentIndex = attachmentsData as AttachmentIndex;
 
+/**
+ * ขนาดของทุกไฟล์ที่สแกนเจอ ไม่ว่าจะอยู่โฟลเดอร์ไหน
+ * ใช้กับไฟล์ที่ products.json ชี้ข้ามโฟลเดอร์มา เช่นใบเสนอราคาที่ใช้ร่วมกันหลายสินค้า
+ */
+const sizeByPath = new Map<string, number>(
+    Object.values(attachmentIndex)
+        .flat()
+        .flatMap((group) => group.files.map((file) => [file.file.toLowerCase(), file.size])),
+);
+
+/** ขนาดไฟล์ที่ชี้มาจาก products.json; 0 = ไม่รู้ (ลิงก์ภายนอก หรือยังไม่มีไฟล์) */
+const sizeOf = (file: string): number => sizeByPath.get(file.toLowerCase()) ?? 0;
+
 /** ดึงนามสกุลไฟล์มาแสดงเป็นป้ายบนปุ่ม เช่น "/files/a/quotation.pdf" -> "PDF" */
 const fileExtension = (path: string): string => {
     const name = path.split('/').pop() ?? '';
@@ -57,27 +70,28 @@ const buildAttachmentGroups = (product: Product): AttachmentGroup[] => {
         (product.attachments ?? []).map((a) => [a.file.toLowerCase(), a.name]),
     );
 
-    const groups: { group: string; files: { file: string; name: string; size: number }[] }[] =
-        scanned.map((entry) => ({
-            group: entry.group,
-            files: entry.files.map((file) => ({
-                ...file,
-                name: labels.get(file.file.toLowerCase()) ?? withoutExtension(file.name),
-            })),
-        }));
+    const groups: AttachmentGroup[] = scanned.map((entry) => ({
+        group: entry.group,
+        files: entry.files.map((file) => ({
+            ...file,
+            name: labels.get(file.file.toLowerCase()) ?? withoutExtension(file.name),
+        })),
+    }));
 
-    // รายการที่เขียนไว้เองแต่ไม่มีไฟล์จริงในโฟลเดอร์ เช่นลิงก์ภายนอก ให้ต่อท้ายกลุ่มบนสุด
+    // รายการที่เขียนไว้เองแต่ไม่ได้อยู่ในโฟลเดอร์ของสินค้านี้ เช่นไฟล์ที่ใช้ร่วมกันหลายสินค้า
+    // หรือลิงก์ภายนอก ให้เพิ่มเข้าไปในกลุ่มที่ระบุไว้ (ไม่ระบุ = กลุ่มบนสุด)
     const onDisk = new Set(
         scanned.flatMap((entry) => entry.files.map((f) => f.file.toLowerCase())),
     );
-    const extra = (product.attachments ?? [])
-        .filter((a) => !onDisk.has(a.file.toLowerCase()))
-        .map((a) => ({ file: a.file, name: a.name, size: 0 }));
 
-    if (extra.length) {
-        const root = groups.find((g) => g.group === '');
-        if (root) root.files.push(...extra);
-        else groups.unshift({ group: '', files: extra });
+    for (const item of product.attachments ?? []) {
+        if (onDisk.has(item.file.toLowerCase())) continue;
+        const key = item.group ?? '';
+        const file = { file: item.file, name: item.name, size: sizeOf(item.file) };
+        const bucket = groups.find((g) => g.group === key);
+        if (bucket) bucket.files.push(file);
+        else if (key) groups.push({ group: key, files: [file] });
+        else groups.unshift({ group: '', files: [file] });
     }
 
     return groups;

@@ -13,6 +13,8 @@ export interface Attachment {
   name: string;
   /** พาธจาก public เช่น "/files/mediasphere/quotation.pdf" */
   file: string;
+  /** หัวข้อที่จะให้ไปอยู่ใต้ ถ้าไม่ใส่จะอยู่กลุ่ม "ไฟล์ทั่วไป" */
+  group?: string;
 }
 
 /** ไฟล์ 1 ไฟล์ที่สคริปต์ scan-files เจอในโฟลเดอร์สินค้า */
