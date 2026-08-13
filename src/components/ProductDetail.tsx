@@ -139,6 +139,35 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                 {product.name}
             </h2>
 
+            <p className="product-description">
+                {product.description}
+            </p>
+            <div className="detail-section">
+                {product.feature.map((feature, index) => (
+                    <div key={index}>
+                        <p className='name'>{feature.name}</p>
+                        <ul>
+                            {feature.list.map((item, index2) => (
+                                <li key={index2}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+
+            <div className="additional-content">
+                {product.technical.map((section, index) => (
+                    <div key={index}>
+                        <p className='name'>{section.name}</p>
+                        <ul>
+                            {section.list.map((item, index2) => (
+                                <li key={index2}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+
             {attachmentGroups.length > 0 && (
                 <div className="attachments">
                     <h3 className="attachments-title">เอกสารดาวน์โหลด</h3>
@@ -172,39 +201,6 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                     ))}
                 </div>
             )}
-
-            <p className="product-description">
-                {product.description}
-            </p>
-            <div className="detail-section">
-                {product.feature.map((feature, index) => (
-                    <div key={index}>
-                        <p className='name'>{feature.name}</p>
-                        <ul>
-                            {feature.list.map((item, index2) => (
-                                <li key={index2}>{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
-
-            <div className="additional-content">
-                {product.technical.map((section, index) => (
-                    <div key={index}>
-                        <p className='name'>{section.name}</p>
-                        <ul>
-                            {section.list.map((item, index2) => (
-                                <li key={index2}>{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
-            </div>
-
-            <Link to="/" className="back-link">
-                <i className="fas fa-arrow-left"></i> กลับหน้าหลัก
-            </Link>
         </section>
     );
 };

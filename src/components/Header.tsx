@@ -19,13 +19,6 @@ const Header = () => {
             <img src="/pic/logo-PSSS.jpg" alt="logo" />
           </a>
         </div>
-        <ul className="nav-links">
-          <li>
-            <a href="/" onClick={(e) => handleNavClick(e, '/')}>
-              หน้าหลัก
-            </a>
-          </li>
-        </ul>
       </nav>
     </header>
   );

@@ -143,8 +143,11 @@
   }
 }
 
+/* อยู่ท้ายหน้า ถัดจากข้อมูลสินค้า จึงขีดเส้นคั่นให้เห็นว่าคนละส่วนกัน */
 .attachments {
   margin-bottom: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
 }
 
 .attachments-title {
