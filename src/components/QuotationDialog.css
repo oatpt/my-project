@@ -56,12 +56,6 @@
   font-size: 1.1rem;
 }
 
-.quotation-hint {
-  margin: 0.15rem 0 0;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
 .quotation-footer {
   flex: none;
   display: flex;

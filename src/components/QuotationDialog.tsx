@@ -285,12 +285,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
             {/* ---------------- ฟอร์มบนจอ ---------------- */}
             <div className="quotation-panel q-only-screen" role="dialog" aria-modal="true" aria-label="ขอใบเสนอราคา">
                 <header className="quotation-toolbar">
-                    <div>
-                        <h3 className="quotation-title">ขอใบเสนอราคา</h3>
-                        <p className="quotation-hint">
-                            จำนวนตั้งไว้ที่ 1 ทุกรายการ วันที่เป็นวันที่วันนี้
-                        </p>
-                    </div>
+                    <h3 className="quotation-title">ขอใบเสนอราคา</h3>
                     <button type="button" className="q-button" ref={closeRef} onClick={onClose}>
                         ปิด
                     </button>
