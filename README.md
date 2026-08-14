@@ -3,7 +3,7 @@
 เว็บแนะนำผลิตภัณฑ์ (React + TypeScript + Vite) เสิร์ฟด้วย nginx ใน Docker
 
 ```
-docker compose up --build     # เปิดที่ http://localhost
+docker compose up --build     # เปิดที่ http://localhost:8081
 npm run dev                   # โหมดพัฒนา
 ```
 
@@ -129,8 +129,84 @@ npm run quotations
 | build ใหม่หรือยัง | `docker compose up --build` หรือ `npm run build` |
 | ชื่อไฟล์ขึ้นต้นด้วย `.` หรือเปล่า | ไฟล์พวกนี้ถูกข้ามโดยตั้งใจ |
 
-เช็กตัวไฟล์แยกต่างหากได้ที่ `http://localhost/files/<folder>/<ชื่อไฟล์>` — ถ้าตรงนี้ 200
+เช็กตัวไฟล์แยกต่างหากได้ที่ `http://localhost:8081/files/<folder>/<ชื่อไฟล์>` — ถ้าตรงนี้ 200
 แต่หน้าเว็บไม่ขึ้น แปลว่ายังไม่ได้ build ใหม่
+
+---
+
+## Deploy ขึ้น Google Cloud VM (pro-teches.com)
+
+VM ตัวนี้มีหลายเว็บรันอยู่ **ตัวที่แยกว่า request ไหนเป็นของเว็บไหนคือ nginx บน host**
+แยกด้วย `server_name` ล้วน ๆ เว็บนี้ = container ที่ผูกไว้แค่ `127.0.0.1:8081`
+แล้วให้ nginx บน host เป็นคนถือ certificate ของ Cloudflare และ proxy เข้ามา
+
+```
+ผู้ใช้ → Cloudflare (เมฆส้ม, https) → nginx บน host :443 → container :8081 → dist/
+```
+
+container ไม่ได้เปิดพอร์ตออกเน็ตเอง เพิ่มเว็บใหม่บน VM นี้ทีหลังก็แค่ใช้พอร์ต 8082, 8083
+ต่อไป ไม่ต้องแตะของเว็บนี้เลย
+
+### ครั้งแรก
+
+**1. DNS + certificate ที่ Cloudflare**
+
+- เพิ่ม A record `pro-teches.com` และ `www` ชี้ไป IP ภายนอกของ VM **เปิดเมฆส้ม (Proxied)**
+- SSL/TLS mode ตั้งเป็น **Full (strict)** และเปิด **Always Use HTTPS**
+- ออก Origin Certificate (SSL/TLS → Origin Server → Create Certificate) ใส่ hostname
+  `pro-teches.com` กับ `*.pro-teches.com` แล้วเอาไปวางบน VM ตามชื่อนี้:
+
+```
+/etc/ssl/cloudflare/pro-teches.com.pem      ← Origin Certificate
+/etc/ssl/cloudflare/pro-teches.com.key      ← Private Key (chmod 600)
+```
+
+certificate ของโดเมนอื่นบนเครื่องเดียวกันใช้แทนกันไม่ได้ ต้องออกใบของโดเมนนี้เอง
+
+**2. IP ของ VM ต้องเป็น static** ไม่งั้น reboot ทีเดียว DNS ชี้ผิดทันที
+(`gcloud compute addresses create ...` แล้วผูกกับ VM) และ VM ต้องเปิดพอร์ต 80/443
+ผ่าน firewall ของ GCP (tag `http-server`, `https-server`)
+
+**3. รัน container**
+
+```bash
+git clone -b pluem https://github.com/oatpt/my-project.git /opt/pro-teches
+cd /opt/pro-teches && docker compose up -d --build
+curl -I http://127.0.0.1:8081/          # ต้องได้ 200 ก่อนไปต่อ
+```
+
+**4. ต่อ nginx บน host**
+
+ไฟล์คอนฟิกอยู่ในโปรเจกต์แล้วที่ [`deploy/pro-teches.com.conf`](deploy/pro-teches.com.conf)
+
+```bash
+sudo cp deploy/pro-teches.com.conf /etc/nginx/sites-available/pro-teches.com
+sudo ln -s /etc/nginx/sites-available/pro-teches.com /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+`nginx -t` ต้องผ่านก่อน reload เสมอ — คอนฟิกพังแล้ว reload ไปเลย **เว็บอื่นบนเครื่อง
+เดียวกันดับตามไปด้วย**
+
+### อัปเดตเว็บรอบถัดไป
+
+```bash
+cd /opt/pro-teches && git pull && docker compose up -d --build
+```
+
+ไม่ต้อง reload nginx บน host เพราะพอร์ตกับ server_name ไม่ได้เปลี่ยน
+ถ้าแก้แล้วยังเห็นของเก่า ให้ purge cache ที่ Cloudflare — ไฟล์ใน `/assets/` ไม่มีปัญหา
+เพราะชื่อเปลี่ยนทุก build แต่ `index.html` โดนแคชที่ขอบได้
+
+### เรื่องที่ตั้งใจให้เป็นแบบนี้
+
+| | ทำไม |
+|---|---|
+| container ผูก `127.0.0.1:8081` ไม่ใช่ `8081` เฉย ๆ | docker เขียน iptables เองไม่ผ่าน ufw เขียนแบบหลังพอร์ตจะทะลุ firewall ออกเน็ต เข้าเว็บตรงข้าม Cloudflare ได้ |
+| พอร์ต 80 บน host ไม่ redirect ไป https เอง | Origin Certificate เบราว์เซอร์ไม่รู้จัก ถ้าเมฆยังเทาแล้ว redirect เองผู้ใช้จะเจอหน้าเตือน certificate ปล่อยให้ Always Use HTTPS จัดการที่ขอบแทน |
+| กฎแคช/404 อยู่ใน `default.conf` ของ container ที่เดียว | host ทำหน้าที่ส่งต่ออย่างเดียว จะได้ไม่มีกฎสองชุดที่ขัดกันเอง |
+| `location ^~ /files/` ไม่ใช่ `/files/` เฉย ๆ | location แบบ regex ชนะ prefix เสมอ ถ้าวันหลังมีใครเพิ่ม `~* \.pdf$` เข้ามา ไฟล์แนบจะหลุดไปเข้า fallback ของ SPA แล้วได้ index.html ที่ตั้งชื่อเป็น .pdf |
+| Origin Certificate อายุ 15 ปี แต่ **ไม่ auto-renew** | ไม่มี certbot มาต่อให้เหมือน Let's Encrypt จดวันหมดไว้ด้วย |
 
 ---
 

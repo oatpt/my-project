@@ -1,8 +1,13 @@
 # Stage 1: Build stage
-FROM node:18 as builder
+FROM node:22-alpine AS builder
 WORKDIR /app
+
+# ลง dependency ก่อน copy ซอร์ส เพื่อให้ layer นี้ถูกใช้ซ้ำตราบใดที่ lockfile ไม่เปลี่ยน
 COPY package*.json ./
-RUN npm install
+RUN npm ci
+
+# ต้อง copy ทั้งโปรเจกต์ ไม่ใช่แค่ src/ เพราะ prebuild ต้องอ่าน public/files/
+# กับ quotations-source/*.xlsx เพื่อสร้าง attachments.json / quotations.json ก่อน vite build
 COPY . .
 RUN npm run build
 

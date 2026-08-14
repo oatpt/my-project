@@ -1,7 +1,21 @@
-version: "3.8"
-
 services:
   app:
     build: .
+    image: pro-teches-web
+    container_name: pro-teches-web
+    restart: unless-stopped
+
+    # ผูกกับ 127.0.0.1 เท่านั้น ทางเข้าเดียวของเว็บคือ nginx บน host ที่ถือ TLS อยู่
+    # (deploy/pro-teches.com.conf) — ห้ามเขียนแค่ "8081:80" เพราะ docker เขียน iptables
+    # เองโดยไม่ผ่าน ufw พอร์ตจะทะลุ firewall ของ GCP ออกเน็ต เข้าเว็บตรงข้าม Cloudflare ได้
     ports:
-      - "80:80"
+      - "127.0.0.1:8081:80"
+
+    # ต้องเป็น 127.0.0.1 ไม่ใช่ localhost — ใน image alpine ชื่อ localhost ชี้ไป ::1 อย่างเดียว
+    # ส่วน nginx ในนี้ listen แค่ IPv4 ใช้ localhost แล้วจะได้ connection refused ตลอด
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
