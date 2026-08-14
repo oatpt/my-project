@@ -1,10 +1,11 @@
 // File: src/components/PriceList.tsx
 //
-// หน้า "ราคาผลิตภัณฑ์" — ตารางเดียวรวมทุกรายการของทั้งเว็บ
+// หน้า "ราคาผลิตภัณฑ์" — ตารางเดียวรวมทุกระบบของทั้งเว็บ
 //
 // เอาเฉพาะรายการพื้นขาวในไฟล์ excel (รายการนอกเกณฑ์ราคากลาง — แถวราคากลาง ICT
-// ที่ระบายสีเขียวไว้ถูกข้าม) รายการไหนเป็นระบบที่มีหน้าของตัวเอง ใช้ชื่ออังกฤษจาก
-// เอกสาร word เป็นชื่อหลัก มีชื่อไทยกำกับ และกดไปหน้ารายละเอียดได้
+// ที่ระบายสีเขียวไว้ถูกข้าม) ที่เป็นระบบซึ่งมีหน้าของตัวเอง รายการพื้นขาวที่ไม่ใช่ระบบ
+// (จอ video wall, ตัวควบคุมจอ, โต๊ะ, เก้าอี้, งานปรับปรุงห้อง War Room) ไม่ขึ้นในตาราง
+// ทุกแถวใช้ชื่ออังกฤษจากเอกสาร word เป็นชื่อหลัก มีชื่อไทยกำกับ และกดไปหน้ารายละเอียดได้
 // คอลัมน์มีแค่ ลำดับ / รายการ / ราคาต่อหน่วย
 
 import { Link } from 'react-router-dom';
@@ -20,12 +21,12 @@ interface PriceListProps {
 const quotationIndex = quotationsData as QuotationIndex;
 
 interface PriceRow {
-    /** ชื่อหลัก — ชื่ออังกฤษของระบบ หรือชื่อรายการตามใบเสนอราคา */
+    /** ชื่อหลัก — ชื่ออังกฤษของระบบ */
     name: string;
-    /** ชื่อไทยกำกับใต้ชื่อหลัก (เฉพาะรายการที่เป็นระบบ) */
+    /** ชื่อไทยกำกับใต้ชื่อหลัก */
     thaiName?: string;
-    /** ลิงก์ไปหน้ารายละเอียด (เฉพาะรายการที่เป็นระบบ) */
-    link?: string;
+    /** ลิงก์ไปหน้ารายละเอียด */
+    link: string;
     /** ราคาต่อหน่วย (บาท) */
     price: number;
 }
@@ -34,7 +35,7 @@ const money = (value: number): string => value.toLocaleString('en-US');
 
 /**
  * รวมรายการพื้นขาวจากใบเสนอราคาทุกโครงการเป็นรายการเดียว เรียงตามลำดับในไฟล์
- * รายการที่ map กับสินค้า (quotationItem) ใช้ชื่อจากเว็บและลิงก์ไปหน้าสินค้า
+ * เอาเฉพาะรายการที่ map กับสินค้า (quotationItem) — ใช้ชื่อจากเว็บและลิงก์ไปหน้าสินค้า
  */
 const buildRows = (products: Product[]): PriceRow[] => {
     const productOfItem = new Map(
@@ -49,16 +50,14 @@ const buildRows = (products: Product[]): PriceRow[] => {
             if (item.fill) continue; // แถวราคากลาง ICT (พื้นเขียว) ไม่เอา
 
             const product = productOfItem.get(`${key}::${item.name}`);
-            rows.push(
-                product
-                    ? {
-                          name: product.name,
-                          thaiName: product.thaiName,
-                          link: `/product-details/${product.id}`,
-                          price: Number(item.each),
-                      }
-                    : { name: item.name, price: Number(item.each) },
-            );
+            if (!product) continue; // รายการพื้นขาวที่ไม่ใช่ระบบของเว็บ (จอ โต๊ะ เก้าอี้ งานปรับปรุงห้อง) ไม่เอา
+
+            rows.push({
+                name: product.name,
+                thaiName: product.thaiName,
+                link: `/product-details/${product.id}`,
+                price: Number(item.each),
+            });
         }
     }
     return rows;
@@ -101,13 +100,9 @@ const PriceList = ({ products, loading }: PriceListProps) => {
                         <div className="price-list-row" key={index}>
                             <span className="price-col-no">{index + 1}</span>
                             <span className="price-col-name">
-                                {row.link ? (
-                                    <Link to={row.link} className="price-name-link">
-                                        {row.name}
-                                    </Link>
-                                ) : (
-                                    <span className="price-name">{row.name}</span>
-                                )}
+                                <Link to={row.link} className="price-name-link">
+                                    {row.name}
+                                </Link>
                                 {row.thaiName && <span className="price-name-thai">{row.thaiName}</span>}
                             </span>
                             <span className="price-col-amount">{money(row.price)}</span>
