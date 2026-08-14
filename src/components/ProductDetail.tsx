@@ -1,6 +1,6 @@
 // File: src/components/ProductDetail.tsx
 import { useParams, Link } from 'react-router-dom';
-import { AttachmentGroup, AttachmentIndex, Product, QuotationCellStyle, QuotationIndex } from '../types';
+import { AttachmentGroup, AttachmentIndex, Product, QuotationIndex } from '../types';
 import attachmentsData from '../data/attachments.json';
 import quotationsData from '../data/quotations.json';
 import './ProductDetail.css';
@@ -22,12 +22,10 @@ const attachmentIndex = attachmentsData as AttachmentIndex;
  */
 const quotationIndex = quotationsData as QuotationIndex;
 
-/** จัดรูปแบบตัวเลขตามที่ตั้งไว้ในช่องนั้นของไฟล์ excel เช่น #,##0 -> "36,000" */
-const money = (value: string, style: QuotationCellStyle = {}): string => {
+/** ใส่ลูกน้ำให้ราคาแบบเดียวกับไฟล์ excel เช่น "2672000" -> "2,672,000" */
+const money = (value: string): string => {
     const n = Number(String(value).replace(/[,\s]/g, ''));
-    if (!Number.isFinite(n)) return value;
-    const decimals = style.decimals ?? 0;
-    return n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    return Number.isFinite(n) ? n.toLocaleString('en-US') : value;
 };
 
 /**
@@ -144,12 +142,15 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     const showGroupTitles =
         attachmentGroups.length > 1 || attachmentGroups[0]?.group !== '';
 
-    // สินค้าที่ยังไม่ได้ผูกกับโครงการไหน ก็ไม่มีตารางราคาให้แสดง
-    const quotation = product.quotation ? quotationIndex[product.quotation] : undefined;
-    // รายการของสินค้าหน้านี้ในตาราง — ใช้เน้นแถวให้เห็นว่าราคาของหัวข้อนี้คือบรรทัดไหน
-    const ownItem = quotation?.items.find((item) => item.name === product.quotationItem);
-    // บรรทัด "โครงการ : ..." ในหัวใบเสนอราคา เอามาเป็นคำโปรยใต้หัวข้อตาราง
-    const projectLine = quotation?.details.find((line) => line.text.startsWith('โครงการ'))?.text;
+    // ตารางราคาของทั้งเว็บ: ทุกระบบรวมอยู่ในตารางเดียว เรียงตามลำดับใน products.json
+    // เอาเฉพาะรายการพื้นขาวในไฟล์ excel (ราคานอกเกณฑ์ราคากลาง) ซึ่งคือตัวระบบแต่ละตัว
+    // ราคาผูกผ่าน quotation/quotationItem ของสินค้า แต่ชื่อที่แสดงใช้ชื่อระบบจากไฟล์ word
+    const priceRows = products.flatMap((p) => {
+        if (!p.quotation || !p.quotationItem) return [];
+        const item = quotationIndex[p.quotation]?.items.find((i) => i.name === p.quotationItem);
+        return item && !item.fill ? [{ product: p, price: item.sum }] : [];
+    });
+    const ownRow = priceRows.find((row) => row.product.id === product.id);
 
     return (
         <section className="section product-detail">
@@ -190,17 +191,17 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                 ))}
             </div>
 
-            {quotation && (
+            {priceRows.length > 0 && (
                 <div className="price-section">
                     <h3 className="price-title">ตารางราคา</h3>
-                    {projectLine && <p className="price-project">{projectLine}</p>}
 
-                    {ownItem && (
+                    {ownRow && (
                         <p className="price-own">
-                            <span className="price-own-name">{ownItem.name}</span>
-                            <span className="price-own-amount">
-                                {money(ownItem.sum, quotation.columnStyles[5])} บาท
+                            <span className="price-own-name">
+                                {product.name}
+                                {product.nameTh && <span className="price-name-th">{product.nameTh}</span>}
                             </span>
+                            <span className="price-own-amount">{money(ownRow.price)} บาท</span>
                         </p>
                     )}
 
@@ -208,43 +209,29 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                         <table className="price-table">
                             <thead>
                                 <tr>
-                                    {quotation.headers.map((header, index) => (
-                                        <th key={index}>{header.text}</th>
-                                    ))}
+                                    <th>ลำดับ</th>
+                                    <th>รายการ</th>
+                                    <th>ราคา (บาท)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {quotation.items.map((item) => (
+                                {priceRows.map((row, index) => (
                                     <tr
-                                        key={item.no}
-                                        className={item.name === product.quotationItem ? 'price-row-own' : undefined}
+                                        key={row.product.id}
+                                        className={row.product.id === product.id ? 'price-row-own' : undefined}
                                     >
-                                        <td className="price-mid">{item.no}</td>
-                                        <td>{item.name}</td>
-                                        <td className="price-mid">{item.qty}</td>
-                                        <td className="price-mid">{item.unit}</td>
-                                        <td className="price-num">{money(item.each, quotation.columnStyles[4])}</td>
-                                        <td className="price-num">{money(item.sum, quotation.columnStyles[5])}</td>
+                                        <td className="price-mid">{index + 1}</td>
+                                        <td>
+                                            {row.product.name}
+                                            {row.product.nameTh && (
+                                                <span className="price-name-th">{row.product.nameTh}</span>
+                                            )}
+                                        </td>
+                                        <td className="price-num">{money(row.price)}</td>
                                     </tr>
                                 ))}
                             </tbody>
-                            {quotation.total && (
-                                <tfoot>
-                                    <tr>
-                                        <td colSpan={5}>{quotation.total.label}</td>
-                                        <td className="price-num">
-                                            {money(quotation.total.amount, quotation.total.amountStyle)}
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            )}
                         </table>
-                    </div>
-
-                    <div className="price-notes">
-                        {quotation.notes.map((note, index) => (
-                            <p key={index}>{note.text}</p>
-                        ))}
                     </div>
                 </div>
             )}

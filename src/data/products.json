@@ -2,6 +2,7 @@
     {
         "id": "3284fbbe-8251-4339-bec4-a5d9498f6bbe",
         "name": "Central Data Management Platform",
+        "nameTh": "ระบบบริหารจัดการข้อมูลกลาง",
         "picture": "pic/dataflowhub.jpg",
         "folder": "central-data-management-platform",
         "quotation": "ใบเสนอราคา_City Data Platform",
@@ -49,6 +50,7 @@
     {
         "id": "7e440791-7637-4fac-ab2d-931b23ce10ef",
         "name": "Spatial Information Platform",
+        "nameTh": "ระบบสารสนเทศภูมิพื้นที่",
         "picture": "pic/terramap.jpg",
         "folder": "spatial-information-platform",
         "quotation": "ใบเสนอราคา_City Data Platform",
@@ -95,6 +97,7 @@
     {
         "id": "aa647fac-1ace-4a19-8294-bcc891cc88bc",
         "name": "Data Integration Gateway",
+        "nameTh": "ระบบศูนย์กลางเชื่อมโยงข้อมูล",
         "picture": "pic/metrodatahub.jpg",
         "folder": "data-integration-gateway",
         "quotation": "ใบเสนอราคา_City Data Platform",
@@ -145,6 +148,7 @@
     {
         "id": "d7759e6c-05c2-4799-a3d8-fafe25b66439",
         "name": "Data Insight Center",
+        "nameTh": "ระบบศูนย์วิเคราะห์ข้อมูล",
         "picture": "pic/data_analytics.webp",
         "folder": "data-insight-center",
         "quotation": "ใบเสนอราคา_City Data Platform",
@@ -188,6 +192,7 @@
     {
         "id": "d6726e99-caa1-49c3-9bc1-77c77f67b99f",
         "name": "IdentiCore",
+        "nameTh": "ระบบศูนย์กลางบริหารบัญชีและสิทธิ์ผู้ใช้งาน",
         "picture": "pic/user_management.webp",
         "folder": "identicore",
         "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
@@ -231,6 +236,7 @@
     {
         "id": "252c8b8c-13cd-4a55-9376-19f461399036",
         "name": "LinkFrame",
+        "nameTh": "แพลตฟอร์มโครงสร้างพื้นฐานแบบแยกส่วน",
         "picture": "pic/modular_application.webp",
         "folder": "linkframe",
         "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
@@ -273,6 +279,7 @@
     {
         "id": "d730fbcb-e10d-4b28-bf40-1bd555c5e8cc",
         "name": "SignalWave",
+        "nameTh": "ระบบสื่อสารและแจ้งเตือนหลายช่องทาง",
         "picture": "pic/notification.webp",
         "folder": "signalwave",
         "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
@@ -312,6 +319,7 @@
     {
         "id": "22147af5-b21a-47ce-8642-6ee1fe2ca381",
         "name": "CivicHub",
+        "nameTh": "แอปพลิเคชันศูนย์กลางบริการประชาชน",
         "picture": "pic/smart_app.webp",
         "folder": "civichub",
         "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
@@ -349,6 +357,7 @@
     {
         "id": "bee17e73-6bfd-4ddd-86e1-456ef2c3eb70",
         "name": "Urban Data Management and Analytics Platform",
+        "nameTh": "ระบบบริหารจัดการและวิเคราะห์ข้อมูลเมือง",
         "picture": "pic/war_room.webp",
         "folder": "urban-data-management-and-analytics-platform",
         "quotation": "ใบเสนอราคา_War Room",
@@ -384,6 +393,7 @@
     {
         "id": "eacba6cd-eac6-473f-b538-cd0d3bc1f780",
         "name": "Central Digital Media Management System",
+        "nameTh": "ระบบบริหารจัดการคลังสื่อดิจิทัลส่วนกลาง",
         "picture": "pic/mediasphere.jpg",
         "folder": "central-digital-media-management-system",
         "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
@@ -419,6 +429,7 @@
     {
         "id": "53db866b-9cbc-43fe-b403-59941ce7e1a2",
         "name": "Multimedia Distribution Platform",
+        "nameTh": "แพลตฟอร์มบูรณาการและกระจายสื่อมัลติมีเดีย",
         "picture": "pic/mediastage.jpg",
         "folder": "multimedia-distribution-platform",
         "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
@@ -454,6 +465,7 @@
     {
         "id": "38754a3b-bd8b-4862-9e1a-6c94da3bec0e",
         "name": "Public Display Management Platform",
+        "nameTh": "แพลตฟอร์มบริหารจัดการสื่อแสดงผลสาธารณะ",
         "picture": "pic/visionboard.jpg",
         "folder": "public-display-management-platform",
         "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
@@ -488,6 +500,7 @@
     {
         "id": "3a8da77f-e5ff-4787-8f89-e4940fd605f2",
         "name": "Central User & Communication System",
+        "nameTh": "ระบบศูนย์กลางบริหารจัดการผู้ใช้งานและการสื่อสารสารสนเทศ",
         "picture": "pic/cityengage.png",
         "folder": "central-user-and-communication-system",
         "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
