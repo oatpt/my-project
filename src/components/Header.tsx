@@ -21,6 +21,11 @@ const Header = () => {
         </div>
         <ul className="nav-links">
           <li>
+            <a href="/" onClick={(e) => handleNavClick(e, '/')}>
+              หน้าหลัก
+            </a>
+          </li>
+          <li>
             <a href="/pricing" onClick={(e) => handleNavClick(e, '/pricing')}>
               ราคา
             </a>
