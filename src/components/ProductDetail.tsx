@@ -1,8 +1,7 @@
 // File: src/components/ProductDetail.tsx
 import { useParams, Link } from 'react-router-dom';
-import { AttachmentGroup, AttachmentIndex, Product, QuotationIndex } from '../types';
+import { AttachmentGroup, AttachmentIndex, Product } from '../types';
 import attachmentsData from '../data/attachments.json';
-import quotationsData from '../data/quotations.json';
 import './ProductDetail.css';
 
 interface ProductDetailProps {
@@ -15,18 +14,6 @@ interface ProductDetailProps {
  * เว็บนี้ไม่มี server จึงอ่านโฟลเดอร์ตอนผู้ใช้เปิดหน้าไม่ได้ ต้องอ่านไว้ก่อนแล้วฝังมากับหน้าเว็บ
  */
 const attachmentIndex = attachmentsData as AttachmentIndex;
-
-/**
- * ตารางราคาของแต่ละโครงการ ที่ scripts/extract-quotations.mjs แปลงมาจาก
- * quotations-source/*.xlsx ตอน build — แสดงท้ายหน้าสินค้าของโครงการนั้น
- */
-const quotationIndex = quotationsData as QuotationIndex;
-
-/** ใส่ลูกน้ำให้ราคาแบบเดียวกับไฟล์ excel เช่น "2672000" -> "2,672,000" */
-const money = (value: string): string => {
-    const n = Number(String(value).replace(/[,\s]/g, ''));
-    return Number.isFinite(n) ? n.toLocaleString('en-US') : value;
-};
 
 /**
  * ขนาดของทุกไฟล์ที่สแกนเจอ ไม่ว่าจะอยู่โฟลเดอร์ไหน
@@ -142,16 +129,6 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     const showGroupTitles =
         attachmentGroups.length > 1 || attachmentGroups[0]?.group !== '';
 
-    // ตารางราคาของทั้งเว็บ: ทุกระบบรวมอยู่ในตารางเดียว เรียงตามลำดับใน products.json
-    // เอาเฉพาะรายการพื้นขาวในไฟล์ excel (ราคานอกเกณฑ์ราคากลาง) ซึ่งคือตัวระบบแต่ละตัว
-    // ราคาผูกผ่าน quotation/quotationItem ของสินค้า แต่ชื่อที่แสดงใช้ชื่อระบบจากไฟล์ word
-    const priceRows = products.flatMap((p) => {
-        if (!p.quotation || !p.quotationItem) return [];
-        const item = quotationIndex[p.quotation]?.items.find((i) => i.name === p.quotationItem);
-        return item && !item.fill ? [{ product: p, price: item.sum }] : [];
-    });
-    const ownRow = priceRows.find((row) => row.product.id === product.id);
-
     return (
         <section className="section product-detail">
 
@@ -190,51 +167,6 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                     </div>
                 ))}
             </div>
-
-            {priceRows.length > 0 && (
-                <div className="price-section">
-                    <h3 className="price-title">ตารางราคา</h3>
-
-                    {ownRow && (
-                        <p className="price-own">
-                            <span className="price-own-name">
-                                {product.name}
-                                {product.nameTh && <span className="price-name-th">{product.nameTh}</span>}
-                            </span>
-                            <span className="price-own-amount">{money(ownRow.price)} บาท</span>
-                        </p>
-                    )}
-
-                    <div className="price-table-wrap">
-                        <table className="price-table">
-                            <thead>
-                                <tr>
-                                    <th>ลำดับ</th>
-                                    <th>รายการ</th>
-                                    <th>ราคา (บาท)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {priceRows.map((row, index) => (
-                                    <tr
-                                        key={row.product.id}
-                                        className={row.product.id === product.id ? 'price-row-own' : undefined}
-                                    >
-                                        <td className="price-mid">{index + 1}</td>
-                                        <td>
-                                            {row.product.name}
-                                            {row.product.nameTh && (
-                                                <span className="price-name-th">{row.product.nameTh}</span>
-                                            )}
-                                        </td>
-                                        <td className="price-num">{money(row.price)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            )}
 
             {attachmentGroups.length > 0 && (
                 <div className="attachments">

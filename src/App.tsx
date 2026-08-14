@@ -9,6 +9,7 @@ import { Product } from './types.ts';
 import productsData from './data/products.json';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProductDetail from './components/ProductDetail.tsx';
+import PriceList from './components/PriceList.tsx';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -47,6 +48,10 @@ function App() {
         <Route
           path="/product-details/:productId"
           element={<ProductDetail products={products} loading={loading} />}
+        />
+        <Route
+          path="/pricing"
+          element={<PriceList products={products} loading={loading} />}
         />
         {/* ลิงก์เก่าอย่าง /quotation ให้กลับหน้าหลักแทนหน้าว่าง */}
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -19,6 +19,13 @@ const Header = () => {
             <img src="/pic/logo-PSSS.jpg" alt="logo" />
           </a>
         </div>
+        <ul className="nav-links">
+          <li>
+            <a href="/pricing" onClick={(e) => handleNavClick(e, '/pricing')}>
+              ราคา
+            </a>
+          </li>
+        </ul>
       </nav>
     </header>
   );

@@ -123,8 +123,8 @@ export type QuotationIndex = Record<string, Quotation>;
 export interface Product {
   id: string;
   name: string;
-  /** ชื่อไทยของระบบ ตามที่ขึ้นต้นคำอธิบายในไฟล์ word */
-  nameTh?: string;
+  /** ชื่อไทยของระบบตามเอกสาร word ใช้แสดงคู่กับชื่ออังกฤษในหน้าราคา */
+  thaiName?: string;
   picture: string;
   /** ชื่อโฟลเดอร์ของสินค้านี้ใน public/files/ — ไฟล์ในนั้นขึ้นหน้าเว็บอัตโนมัติ */
   folder: string;
