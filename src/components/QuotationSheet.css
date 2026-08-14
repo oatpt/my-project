@@ -32,7 +32,9 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 8pt;
-  table-layout: fixed;
+  /* ไม่ใช้ table-layout: fixed — ความกว้างใน colgroup เป็นแค่แนวทาง ให้คอลัมน์ขยายได้
+     ตามเนื้อหา ไม่งั้นคำที่กว้างกว่าคอลัมน์ (เช่น "จำนวน" ในเครื่องที่ไม่มีฟอนต์ไทยแคบ)
+     จะล้นไปทับช่องข้าง ๆ */
 }
 
 .q-table th,

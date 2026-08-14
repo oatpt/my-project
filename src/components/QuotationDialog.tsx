@@ -2,9 +2,12 @@
 //
 // ฟอร์ม "ขอใบเสนอราคา" — เปิดจากหน้ารายละเอียดสินค้า
 //
-// หน้าตาบนจอคือหน้ากระดาษจริงที่จะพิมพ์ออกมา สี ขนาดตัวอักษร ความกว้างคอลัมน์
-// และรูปแบบตัวเลข อ่านมาจากไฟล์ .xlsx ต้นฉบับทั้งหมด กระดาษที่ได้จึงเหมือนใบเสนอราคาเดิม
-// ช่องกรอกจะหายไปตอนพิมพ์ เหลือแต่ข้อความ
+// บนจอเป็นฟอร์มกรอกธรรมดา สูงไม่เกินหน้าจอ เลื่อนดูข้างในได้
+// รายการแยกเป็นสองกลุ่ม: ตามราคากลาง ICT กับนอกราคากลาง
+//
+// ส่วน "เอกสาร" มีเฉพาะตอนสั่งพิมพ์ — แผ่นกระดาษถูกซ่อนไว้ในหน้า พอสั่งพิมพ์
+// ฟอร์มจะหายไปเหลือแต่กระดาษ ซึ่งจัดหน้าตามรูปแบบที่อ่านมาจากไฟล์ .xlsx ต้นฉบับ
+// (สี ฟอนต์ ความกว้างคอลัมน์ รูปแบบตัวเลข — ดู scripts/lib/quotation-xlsx.mjs)
 
 import { CSSProperties, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -18,12 +21,13 @@ interface QuotationDialogProps {
 }
 
 interface DraftItem {
-    /** คีย์สำหรับ React เท่านั้น ไม่ได้พิมพ์ออกมา — ลำดับที่แสดงนับใหม่จากตำแหน่งแถวเสมอ */
+    /** คีย์สำหรับ React เท่านั้น — ลำดับที่แสดงนับใหม่จากตำแหน่งแถวเสมอ */
     key: number;
     name: string;
     qty: string;
     unit: string;
     each: string;
+    /** สีพื้นของแถวในไฟล์ต้นฉบับ ใช้เป็นตัวบอกด้วยว่าเป็นรายการตามราคากลาง ICT */
     fill: string;
 }
 
@@ -46,13 +50,12 @@ const toNumber = (value: string): number => {
 };
 
 /** จัดรูปแบบตัวเลขตามที่ตั้งไว้ในช่องนั้นของไฟล์ excel เช่น #,##0 -> "36,000" */
-const format = (value: number, style: QuotationCellStyle): string => {
-    const decimals = style.decimals ?? null;
-    if (decimals === null) return String(value);
+const format = (value: number, style: QuotationCellStyle = {}): string => {
+    const decimals = style.decimals ?? 0;
     return value.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 };
 
-/** แปลงรูปแบบช่องจากไฟล์ excel เป็น style ของ CSS */
+/** แปลงรูปแบบช่องจากไฟล์ excel เป็น style ของ CSS (ใช้กับแผ่นกระดาษตอนพิมพ์) */
 const cellStyle = (style: QuotationCellStyle | undefined, fill?: string): CSSProperties => {
     const s = style ?? {};
     return {
@@ -96,24 +99,22 @@ const autoSize = (el: HTMLTextAreaElement | null): void => {
     el.style.height = `${el.scrollHeight}px`;
 };
 
-/**
- * ช่องข้อความที่ยาวได้หลายบรรทัด คู่กับข้อความที่จะโผล่มาแทนตอนพิมพ์
- * printValue ใช้เมื่อสิ่งที่พิมพ์ต่างจากสิ่งที่กรอก เช่นราคาที่ต้องใส่ลูกน้ำตามรูปแบบในไฟล์ excel
- */
-const Field = ({
+const TextInput = ({
     value,
     onChange,
     label,
-    printValue,
+    multiline = false,
+    align,
 }: {
     value: string;
     onChange: (value: string) => void;
     label: string;
-    printValue?: string;
-}) => (
-    <>
+    multiline?: boolean;
+    align?: 'right' | 'center';
+}) =>
+    multiline ? (
         <textarea
-            className="q-edit"
+            className="qf-input"
             rows={1}
             value={value}
             aria-label={label}
@@ -123,26 +124,39 @@ const Field = ({
                 onChange(e.currentTarget.value);
             }}
         />
-        <span className="q-print">{printValue ?? value}</span>
-    </>
-);
+    ) : (
+        <input
+            className="qf-input"
+            style={align ? { textAlign: align } : undefined}
+            type="text"
+            inputMode={align === 'right' ? 'decimal' : undefined}
+            value={value}
+            aria-label={label}
+            onChange={(e) => onChange(e.currentTarget.value)}
+        />
+    );
 
 const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
     const [draft, setDraft] = useState<Draft>(() => makeDraft(quotation));
     const closeRef = useRef<HTMLButtonElement>(null);
 
     const columnStyles = quotation.columnStyles;
-    const totalStyle = quotation.total;
 
+    // ลำดับและราคารวมคิดจากตำแหน่งในรายการเต็ม (ลำดับเดียวกับที่จะพิมพ์ลงกระดาษ)
     const rows = useMemo(
         () =>
-            draft.items.map((item) => ({
+            draft.items.map((item, index) => ({
                 ...item,
+                no: index + 1,
                 sum: toNumber(item.qty) * toNumber(item.each),
             })),
         [draft.items],
     );
     const total = rows.reduce((sum, row) => sum + row.sum, 0);
+
+    // "ราคากลาง" ดูจากสีพื้นที่ระบายไว้ในไฟล์ต้นฉบับ (แถวราคากลาง ICT ถูกระบายสีทุกแถว)
+    const standardRows = rows.filter((row) => row.fill);
+    const customRows = rows.filter((row) => !row.fill);
 
     useEffect(() => {
         document.body.classList.add('quotation-open');
@@ -188,6 +202,66 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
             [field]: d[field].map((line, i) => (i === index ? value : line)),
         }));
 
+    const itemRow = (row: (typeof rows)[number]) => (
+        <div className="qf-row" key={row.key}>
+            <span className="qf-no">{row.no}</span>
+            <div className="qf-cell qf-cell-name">
+                <TextInput
+                    multiline
+                    value={row.name}
+                    label={`รายการที่ ${row.no}`}
+                    onChange={(value) => patchItem(row.key, { name: value })}
+                />
+            </div>
+            <div className="qf-cell qf-cell-qty">
+                <TextInput
+                    align="center"
+                    value={row.qty}
+                    label={`จำนวนของรายการที่ ${row.no}`}
+                    onChange={(value) => patchItem(row.key, { qty: value })}
+                />
+            </div>
+            <div className="qf-cell qf-cell-unit">
+                <TextInput
+                    align="center"
+                    value={row.unit}
+                    label={`หน่วยของรายการที่ ${row.no}`}
+                    onChange={(value) => patchItem(row.key, { unit: value })}
+                />
+            </div>
+            <div className="qf-cell qf-cell-price">
+                <TextInput
+                    align="right"
+                    value={row.each}
+                    label={`ราคาต่อหน่วยของรายการที่ ${row.no}`}
+                    onChange={(value) => patchItem(row.key, { each: value })}
+                />
+            </div>
+            <span className="qf-sum">{format(row.sum, columnStyles[5])}</span>
+            <button
+                type="button"
+                className="qf-remove"
+                onClick={() => removeItem(row.key)}
+                aria-label={`ลบรายการที่ ${row.no}`}
+                title="ลบรายการนี้"
+            >
+                ×
+            </button>
+        </div>
+    );
+
+    const columnHeadings = (
+        <div className="qf-row qf-headings" aria-hidden="true">
+            <span className="qf-no">ลำดับ</span>
+            <span className="qf-cell-name">รายการ</span>
+            <span className="qf-cell-qty">จำนวน</span>
+            <span className="qf-cell-unit">หน่วย</span>
+            <span className="qf-cell-price">ราคาต่อหน่วย</span>
+            <span className="qf-sum">ราคารวม</span>
+            <span className="qf-remove-space"></span>
+        </div>
+    );
+
     // แขวนไว้ใต้ body ไม่ใช่ใต้ #root เพราะตอนพิมพ์เราซ่อน #root ทั้งก้อนเพื่อให้เหลือแต่กระดาษ
     return createPortal(
         <div
@@ -196,150 +270,168 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                 if (e.target === e.currentTarget) onClose();
             }}
         >
-            <div className="quotation-panel" role="dialog" aria-modal="true" aria-label="ขอใบเสนอราคา">
-                <div className="quotation-toolbar q-only-screen">
-                    <p className="quotation-hint">
-                        แก้ไขข้อมูลในกระดาษได้เลย จำนวนตั้งไว้ที่ 1 ทุกรายการ วันที่เป็นวันที่วันนี้
-                    </p>
-                    <div className="quotation-actions">
-                        <button type="button" className="q-button" onClick={addItem}>
-                            เพิ่มรายการ
+            {/* ---------------- ฟอร์มบนจอ ---------------- */}
+            <div className="quotation-panel q-only-screen" role="dialog" aria-modal="true" aria-label="ขอใบเสนอราคา">
+                <header className="quotation-toolbar">
+                    <div>
+                        <h3 className="quotation-title">ขอใบเสนอราคา</h3>
+                        <p className="quotation-hint">
+                            จำนวนตั้งไว้ที่ 1 ทุกรายการ (ราคาต่อหน่วย) วันที่เป็นวันที่วันนี้ แก้ได้ทุกช่อง
+                        </p>
+                    </div>
+                    <button type="button" className="q-button" ref={closeRef} onClick={onClose}>
+                        ปิด
+                    </button>
+                </header>
+
+                <div className="qf-body">
+                    <section className="qf-section">
+                        <h4 className="qf-section-title">หัวเอกสาร</h4>
+                        {draft.details.map((line, index) => (
+                            <div className="qf-detail" key={index}>
+                                <TextInput
+                                    multiline
+                                    value={line}
+                                    label={`รายละเอียดบรรทัดที่ ${index + 1}`}
+                                    onChange={(value) => patchLine('details', index, value)}
+                                />
+                            </div>
+                        ))}
+                    </section>
+
+                    {standardRows.length > 0 && (
+                        <section className="qf-section">
+                            <h4 className="qf-section-title">
+                                รายการตามราคากลาง ICT
+                                <span className="qf-badge qf-badge-standard">ราคากลาง</span>
+                            </h4>
+                            {columnHeadings}
+                            {standardRows.map(itemRow)}
+                        </section>
+                    )}
+
+                    <section className="qf-section">
+                        <h4 className="qf-section-title">
+                            รายการนอกราคากลาง
+                            <span className="qf-badge">กำหนดราคาเอง</span>
+                        </h4>
+                        {customRows.length > 0 ? (
+                            <>
+                                {columnHeadings}
+                                {customRows.map(itemRow)}
+                            </>
+                        ) : (
+                            <p className="qf-empty">ยังไม่มีรายการ</p>
+                        )}
+                        <button type="button" className="qf-add" onClick={addItem}>
+                            + เพิ่มรายการ
                         </button>
+                    </section>
+
+                    <section className="qf-section">
+                        <h4 className="qf-section-title">หมายเหตุ</h4>
+                        {draft.notes.map((note, index) => (
+                            <div className="qf-detail" key={index}>
+                                <TextInput
+                                    multiline
+                                    value={note}
+                                    label={`หมายเหตุบรรทัดที่ ${index + 1}`}
+                                    onChange={(value) => patchLine('notes', index, value)}
+                                />
+                            </div>
+                        ))}
+                    </section>
+                </div>
+
+                <footer className="quotation-footer">
+                    <div className="qf-total">
+                        <span>{quotation.total?.label ?? 'รวมเป็นเงินทั้งสิ้น'}</span>
+                        <strong>{format(total, quotation.total?.amountStyle)} บาท</strong>
+                    </div>
+                    <div className="quotation-actions">
                         <button type="button" className="q-button" onClick={() => setDraft(makeDraft(quotation))}>
                             เริ่มใหม่
                         </button>
                         <button type="button" className="q-button q-button-primary" onClick={() => window.print()}>
                             พิมพ์ / บันทึกเป็น PDF
                         </button>
-                        <button type="button" className="q-button" ref={closeRef} onClick={onClose}>
-                            ปิด
-                        </button>
                     </div>
-                </div>
+                </footer>
+            </div>
 
-                <div className="quotation-scroll">
-                    <div
-                        className="q-sheet quotation-sheet"
-                        style={{ '--q-border': quotation.borderColor } as CSSProperties}
-                    >
-                        <p className="q-line" style={cellStyle(quotation.title.style)}>
-                            {quotation.title.text}
-                        </p>
-                        <p className="q-line" style={cellStyle(quotation.company.style)}>
-                            {quotation.company.text}
-                        </p>
+            {/* ---------------- แผ่นกระดาษ โผล่เฉพาะตอนพิมพ์ ---------------- */}
+            <div
+                className="q-sheet q-print-sheet"
+                style={{ '--q-border': quotation.borderColor } as CSSProperties}
+            >
+                <p className="q-line" style={cellStyle(quotation.title.style)}>
+                    {quotation.title.text}
+                </p>
+                <p className="q-line" style={cellStyle(quotation.company.style)}>
+                    {quotation.company.text}
+                </p>
+                {draft.details.map((line, index) => (
+                    <p className="q-line" key={index} style={cellStyle(quotation.details[index]?.style)}>
+                        {line}
+                    </p>
+                ))}
 
-                        {draft.details.map((line, index) => (
-                            <p
-                                className="q-line"
+                <table className="q-table">
+                    <colgroup>
+                        {quotation.columns.map((width, index) => (
+                            <col
                                 key={index}
-                                style={cellStyle(quotation.details[index]?.style)}
-                            >
-                                <Field
-                                    value={line}
-                                    label={`รายละเอียดบรรทัดที่ ${index + 1}`}
-                                    onChange={(value) => patchLine('details', index, value)}
-                                />
-                            </p>
+                                style={{
+                                    width: `${(width / quotation.columns.reduce((a, b) => a + b, 0)) * 100}%`,
+                                }}
+                            />
                         ))}
-
-                        <table className="q-table">
-                            <colgroup>
-                                {quotation.columns.map((width, index) => (
-                                    <col
-                                        key={index}
-                                        style={{
-                                            width: `${(width / quotation.columns.reduce((a, b) => a + b, 0)) * 100}%`,
-                                        }}
-                                    />
-                                ))}
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    {quotation.headers.map((header, index) => (
-                                        <th key={index} style={cellStyle(header.style)}>
-                                            {header.text}
-                                        </th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {rows.map((row, index) => (
-                                    <tr key={row.key}>
-                                        {/* columnStyles เก็บรูปแบบของคอลัมน์ ส่วนสีพื้นใช้ของแถวนั้น ๆ */}
-                                        <td className="no-cell" style={cellStyle(columnStyles[0], row.fill)}>
-                                            {index + 1}
-                                            <button
-                                                type="button"
-                                                className="q-remove q-only-screen"
-                                                onClick={() => removeItem(row.key)}
-                                                aria-label={`ลบรายการที่ ${index + 1}`}
-                                                title="ลบรายการนี้"
-                                            >
-                                                ×
-                                            </button>
-                                        </td>
-                                        <td style={cellStyle(columnStyles[1], row.fill)}>
-                                            <Field
-                                                value={row.name}
-                                                label={`รายการที่ ${index + 1}`}
-                                                onChange={(value) => patchItem(row.key, { name: value })}
-                                            />
-                                        </td>
-                                        <td style={cellStyle(columnStyles[2], row.fill)}>
-                                            <Field
-                                                value={row.qty}
-                                                label={`จำนวนของรายการที่ ${index + 1}`}
-                                                onChange={(value) => patchItem(row.key, { qty: value })}
-                                            />
-                                        </td>
-                                        <td style={cellStyle(columnStyles[3], row.fill)}>
-                                            <Field
-                                                value={row.unit}
-                                                label={`หน่วยของรายการที่ ${index + 1}`}
-                                                onChange={(value) => patchItem(row.key, { unit: value })}
-                                            />
-                                        </td>
-                                        <td style={cellStyle(columnStyles[4], row.fill)}>
-                                            <Field
-                                                value={row.each}
-                                                label={`ราคาต่อหน่วยของรายการที่ ${index + 1}`}
-                                                onChange={(value) => patchItem(row.key, { each: value })}
-                                                printValue={format(toNumber(row.each), columnStyles[4] ?? {})}
-                                            />
-                                        </td>
-                                        <td style={cellStyle(columnStyles[5], row.fill)}>
-                                            {format(row.sum, columnStyles[5] ?? {})}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                            {totalStyle && (
-                                <tfoot>
-                                    <tr>
-                                        <td colSpan={5} style={cellStyle(totalStyle.labelStyle)}>
-                                            {totalStyle.label}
-                                        </td>
-                                        <td style={cellStyle(totalStyle.amountStyle)}>
-                                            {format(total, totalStyle.amountStyle)}
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            )}
-                        </table>
-
-                        <div className="q-notes">
-                            {draft.notes.map((note, index) => (
-                                <p className="q-note" key={index} style={cellStyle(quotation.notes[index]?.style)}>
-                                    <Field
-                                        value={note}
-                                        label={`หมายเหตุบรรทัดที่ ${index + 1}`}
-                                        onChange={(value) => patchLine('notes', index, value)}
-                                    />
-                                </p>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            {quotation.headers.map((header, index) => (
+                                <th key={index} style={cellStyle(header.style)}>
+                                    {header.text}
+                                </th>
                             ))}
-                        </div>
-                    </div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows.map((row) => (
+                            <tr key={row.key}>
+                                <td style={cellStyle(columnStyles[0], row.fill)}>{row.no}</td>
+                                <td style={cellStyle(columnStyles[1], row.fill)}>{row.name}</td>
+                                <td style={cellStyle(columnStyles[2], row.fill)}>{row.qty}</td>
+                                <td style={cellStyle(columnStyles[3], row.fill)}>{row.unit}</td>
+                                <td style={cellStyle(columnStyles[4], row.fill)}>
+                                    {format(toNumber(row.each), columnStyles[4])}
+                                </td>
+                                <td style={cellStyle(columnStyles[5], row.fill)}>
+                                    {format(row.sum, columnStyles[5])}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    {quotation.total && (
+                        <tfoot>
+                            <tr>
+                                <td colSpan={5} style={cellStyle(quotation.total.labelStyle)}>
+                                    {quotation.total.label}
+                                </td>
+                                <td style={cellStyle(quotation.total.amountStyle)}>
+                                    {format(total, quotation.total.amountStyle)}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    )}
+                </table>
+
+                <div className="q-notes">
+                    {draft.notes.map((note, index) => (
+                        <p className="q-note" key={index} style={cellStyle(quotation.notes[index]?.style)}>
+                            {note}
+                        </p>
+                    ))}
                 </div>
             </div>
         </div>,
