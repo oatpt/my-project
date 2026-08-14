@@ -1,7 +1,10 @@
 // File: src/components/ProductDetail.tsx
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { AttachmentGroup, AttachmentIndex, Product } from '../types';
+import { AttachmentGroup, AttachmentIndex, Product, QuotationIndex } from '../types';
 import attachmentsData from '../data/attachments.json';
+import quotationsData from '../data/quotations.json';
+import QuotationDialog from './QuotationDialog';
 import './ProductDetail.css';
 
 interface ProductDetailProps {
@@ -14,6 +17,12 @@ interface ProductDetailProps {
  * เว็บนี้ไม่มี server จึงอ่านโฟลเดอร์ตอนผู้ใช้เปิดหน้าไม่ได้ ต้องอ่านไว้ก่อนแล้วฝังมากับหน้าเว็บ
  */
 const attachmentIndex = attachmentsData as AttachmentIndex;
+
+/**
+ * ใบเสนอราคาของแต่ละโครงการ ที่ scripts/extract-quotations.mjs แปลงมาจาก
+ * quotations-source/*.xlsx ตอน build — ใช้เป็นค่าตั้งต้นของฟอร์ม "ขอใบเสนอราคา"
+ */
+const quotationIndex = quotationsData as QuotationIndex;
 
 /**
  * ขนาดของทุกไฟล์ที่สแกนเจอ ไม่ว่าจะอยู่โฟลเดอร์ไหน
@@ -99,6 +108,7 @@ const buildAttachmentGroups = (product: Product): AttachmentGroup[] => {
 
 const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     const { productId } = useParams<{ productId: string }>();
+    const [askingQuotation, setAskingQuotation] = useState(false);
 
     if (loading) {
         return (
@@ -128,6 +138,9 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     // ถ้ามีกลุ่มเดียวและไม่ได้แยกโฟลเดอร์ย่อย หัวข้อย่อยจะซ้ำกับ "เอกสารดาวน์โหลด" ข้างบน
     const showGroupTitles =
         attachmentGroups.length > 1 || attachmentGroups[0]?.group !== '';
+
+    // สินค้าที่ยังไม่ได้ผูกกับใบเสนอราคาโครงการไหน ก็ไม่ต้องมีปุ่มขอใบเสนอราคา
+    const quotation = product.quotation ? quotationIndex[product.quotation] : undefined;
 
     return (
         <section className="section product-detail">
@@ -168,6 +181,21 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                 ))}
             </div>
 
+            {quotation && (
+                <div className="quotation-cta">
+                    <button
+                        type="button"
+                        className="quotation-request"
+                        onClick={() => setAskingQuotation(true)}
+                    >
+                        <i className="fas fa-file-invoice-dollar"></i> ขอใบเสนอราคา
+                    </button>
+                    <p className="quotation-cta-note">
+                        เปิดใบเสนอราคาของโครงการนี้ขึ้นมาแก้ไขจำนวนและราคา แล้วสั่งพิมพ์หรือบันทึกเป็น PDF ได้เลย
+                    </p>
+                </div>
+            )}
+
             {attachmentGroups.length > 0 && (
                 <div className="attachments">
                     <h3 className="attachments-title">เอกสารดาวน์โหลด</h3>
@@ -200,6 +228,10 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                         </div>
                     ))}
                 </div>
+            )}
+
+            {quotation && askingQuotation && (
+                <QuotationDialog quotation={quotation} onClose={() => setAskingQuotation(false)} />
             )}
         </section>
     );

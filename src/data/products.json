@@ -4,6 +4,7 @@
         "name": "Central Data Management Platform",
         "picture": "pic/dataflowhub.jpg",
         "folder": "central-data-management-platform",
+        "quotation": "ใบเสนอราคา_City Data Platform",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบฐานข้อมูลเมือง City Data Platform)",
@@ -56,6 +57,7 @@
         "name": "Spatial Information Platform",
         "picture": "pic/terramap.jpg",
         "folder": "spatial-information-platform",
+        "quotation": "ใบเสนอราคา_City Data Platform",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบฐานข้อมูลเมือง City Data Platform)",
@@ -107,6 +109,7 @@
         "name": "Data Integration Gateway",
         "picture": "pic/metrodatahub.jpg",
         "folder": "data-integration-gateway",
+        "quotation": "ใบเสนอราคา_City Data Platform",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบฐานข้อมูลเมือง City Data Platform)",
@@ -162,6 +165,7 @@
         "name": "Data Insight Center",
         "picture": "pic/data_analytics.webp",
         "folder": "data-insight-center",
+        "quotation": "ใบเสนอราคา_City Data Platform",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบฐานข้อมูลเมือง City Data Platform)",
@@ -210,6 +214,7 @@
         "name": "IdentiCore",
         "picture": "pic/user_management.webp",
         "folder": "identicore",
+        "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการ Smart Thatoom Super App)",
@@ -258,6 +263,7 @@
         "name": "LinkFrame",
         "picture": "pic/modular_application.webp",
         "folder": "linkframe",
+        "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการ Smart Thatoom Super App)",
@@ -305,6 +311,7 @@
         "name": "SignalWave",
         "picture": "pic/notification.webp",
         "folder": "signalwave",
+        "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการ Smart Thatoom Super App)",
@@ -349,6 +356,7 @@
         "name": "CivicHub",
         "picture": "pic/smart_app.webp",
         "folder": "civichub",
+        "quotation": "ใบเสนอราคา_Smart Thatoom Super App",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการ Smart Thatoom Super App)",
@@ -391,6 +399,7 @@
         "name": "Urban Data Management and Analytics Platform",
         "picture": "pic/war_room.webp",
         "folder": "urban-data-management-and-analytics-platform",
+        "quotation": "ใบเสนอราคา_War Room",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการศูนย์ข้อมูลและศูนย์เผชิญเหตุ War Room)",
@@ -431,6 +440,7 @@
         "name": "Central Digital Media Management System",
         "picture": "pic/mediasphere.jpg",
         "folder": "central-digital-media-management-system",
+        "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบสื่อสารและประชาสัมพันธ์ข้อมูลข่าวสาร)",
@@ -471,6 +481,7 @@
         "name": "Multimedia Distribution Platform",
         "picture": "pic/mediastage.jpg",
         "folder": "multimedia-distribution-platform",
+        "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบสื่อสารและประชาสัมพันธ์ข้อมูลข่าวสาร)",
@@ -511,6 +522,7 @@
         "name": "Public Display Management Platform",
         "picture": "pic/visionboard.jpg",
         "folder": "public-display-management-platform",
+        "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบสื่อสารและประชาสัมพันธ์ข้อมูลข่าวสาร)",
@@ -550,6 +562,7 @@
         "name": "Central User & Communication System",
         "picture": "pic/cityengage.png",
         "folder": "central-user-and-communication-system",
+        "quotation": "ใบเสนอราคา_ระบบประชาสัมพันธ์",
         "attachments": [
             {
                 "name": "ใบเสนอราคา (โครงการระบบสื่อสารและประชาสัมพันธ์ข้อมูลข่าวสาร)",

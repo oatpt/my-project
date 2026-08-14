@@ -1,0 +1,1470 @@
+{
+  "ใบเสนอราคา_City Data Platform": {
+    "title": {
+      "text": "ใบเสนอราคา",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 20,
+        "bold": true,
+        "italic": false,
+        "color": "#1F4E78",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "company": {
+      "text": "ProTech",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 16,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "details": [
+      {
+        "text": "เสนอต่อ  องค์การบริหารส่วนตำบลท่าตูม อำเภอศรีมหาโพธิ จังหวัดปราจีนบุรี",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": false,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "center",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบฐานข้อมูลเมืองเพื่อรองรับการพัฒนาเมืองอัจฉริยะ (City Data Platform) รองรับนโยบาย Smart Thatoom",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "left",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "วันที่ 12 สิงหาคม 2569",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "right",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "headers": [
+      {
+        "text": "ลำดับ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "จำนวน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "หน่วย",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคาต่อหน่วย (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคารวม (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      }
+    ],
+    "columns": [
+      6,
+      58,
+      9,
+      10,
+      18,
+      20
+    ],
+    "columnStyles": [
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "left",
+        "wrap": true,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    ],
+    "items": [
+      {
+        "no": "1",
+        "name": "เครื่องคอมพิวเตอร์แม่ข่าย แบบที่ 1  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "150000",
+        "sum": "150000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "2",
+        "name": "อุปกรณ์ป้องกันเครือข่าย (Next Generation Firewall) แบบที่ 1  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "220000",
+        "sum": "220000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "3",
+        "name": "อุปกรณ์กระจายสัญญาณ (L2 Switch) ขนาด 24 ช่อง แบบที่ 2  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "13000",
+        "sum": "13000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "4",
+        "name": "ตู้สําหรับจัดเก็บเครื่องคอมพิวเตอร์และอุปกรณ์ แบบที่ 2 (ขนาด 42U)  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "ตู้",
+        "each": "22000",
+        "sum": "22000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "5",
+        "name": "เครื่องสํารองไฟฟ้า ขนาด 2 kVA  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "12000",
+        "sum": "12000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "6",
+        "name": "ระบบฐานข้อมูลเมือง (Central City Database)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2672000",
+        "sum": "2672000",
+        "fill": ""
+      },
+      {
+        "no": "7",
+        "name": "ระบบแผนที่ GIS (Geographic Information System)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2273000",
+        "sum": "2273000",
+        "fill": ""
+      },
+      {
+        "no": "8",
+        "name": "ระบบแลกเปลี่ยนข้อมูล (Data Exchange System)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2443000",
+        "sum": "2443000",
+        "fill": ""
+      },
+      {
+        "no": "9",
+        "name": "ระบบแดชบอร์ดการวิเคราะห์ข้อมูล (Data Analytics Dashboard)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2560000",
+        "sum": "2560000",
+        "fill": ""
+      }
+    ],
+    "total": {
+      "label": "รวมเป็นเงินทั้งสิ้น (รวมภาษีมูลค่าเพิ่มแล้ว)",
+      "amount": "10365000",
+      "labelStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": null
+      },
+      "amountStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    },
+    "notes": [
+      {
+        "text": "หมายเหตุ : ราคารวมภาษีมูลค่าเพิ่ม (VAT 7%) แล้ว / ยืนราคา 90 วัน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "#548235",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "borderColor": "#B0B0B0"
+  },
+  "ใบเสนอราคา_Smart Thatoom Super App": {
+    "title": {
+      "text": "ใบเสนอราคา",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 20,
+        "bold": true,
+        "italic": false,
+        "color": "#1F4E78",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "company": {
+      "text": "ProTech",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 16,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "details": [
+      {
+        "text": "เสนอต่อ  องค์การบริหารส่วนตำบลท่าตูม อำเภอศรีมหาโพธิ จังหวัดปราจีนบุรี",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": false,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "center",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบโครงสร้างพื้นฐานแอปพลิเคชันสมาร์ทท่าตูม เพื่อรองรับการพัฒนาเมืองอัจฉริยะ Smart Thatoom (Smart Thatoom Super App)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "left",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "วันที่ 12 สิงหาคม 2569",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "right",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "headers": [
+      {
+        "text": "ลำดับ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "จำนวน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "หน่วย",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคาต่อหน่วย (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคารวม (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      }
+    ],
+    "columns": [
+      6,
+      58,
+      9,
+      10,
+      18,
+      20
+    ],
+    "columnStyles": [
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "left",
+        "wrap": true,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    ],
+    "items": [
+      {
+        "no": "1",
+        "name": "เครื่องคอมพิวเตอร์แม่ข่าย แบบที่ 1  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "150000",
+        "sum": "150000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "2",
+        "name": "เครื่องสำรองไฟฟ้า ขนาด 2 kVA  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "12000",
+        "sum": "12000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "3",
+        "name": "ระบบบริหารจัดการผู้ใช้งาน (User Management System)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2227000",
+        "sum": "2227000",
+        "fill": ""
+      },
+      {
+        "no": "4",
+        "name": "ระบบบริการจัดการโปรแกรมแยกอิสระ (Modular Application)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2903000",
+        "sum": "2903000",
+        "fill": ""
+      },
+      {
+        "no": "5",
+        "name": "ระบบแจ้งเตือน (Notification)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "1738000",
+        "sum": "1738000",
+        "fill": ""
+      },
+      {
+        "no": "6",
+        "name": "ระบบแอปพลิเคชั่นกลาง (Smart Thatoom Super App)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2495000",
+        "sum": "2495000",
+        "fill": ""
+      }
+    ],
+    "total": {
+      "label": "รวมเป็นเงินทั้งสิ้น (รวมภาษีมูลค่าเพิ่มแล้ว)",
+      "amount": "9525000",
+      "labelStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": null
+      },
+      "amountStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    },
+    "notes": [
+      {
+        "text": "หมายเหตุ : ราคารวมภาษีมูลค่าเพิ่ม (VAT 7%) แล้ว / ยืนราคา 90 วัน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "#548235",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "borderColor": "#B0B0B0"
+  },
+  "ใบเสนอราคา_War Room": {
+    "title": {
+      "text": "ใบเสนอราคา",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 20,
+        "bold": true,
+        "italic": false,
+        "color": "#1F4E78",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "company": {
+      "text": "ProTech",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 16,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "details": [
+      {
+        "text": "เสนอต่อ  องค์การบริหารส่วนตำบลท่าตูม อำเภอศรีมหาโพธิ จังหวัดปราจีนบุรี",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": false,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "center",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบศูนย์ข้อมูลและศูนย์เผชิญเหตุ (War Room) รองรับนโยบาย Smart Thatoom",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "left",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "วันที่ 12 สิงหาคม 2569",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "right",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "headers": [
+      {
+        "text": "ลำดับ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "จำนวน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "หน่วย",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคาต่อหน่วย (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคารวม (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      }
+    ],
+    "columns": [
+      6,
+      58,
+      9,
+      10,
+      18,
+      20
+    ],
+    "columnStyles": [
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "left",
+        "wrap": true,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    ],
+    "items": [
+      {
+        "no": "1",
+        "name": "เครื่องคอมพิวเตอร์ สำหรับงานประมวลผล แบบที่ 2  [ราคากลาง ICT]",
+        "qty": "2",
+        "unit": "ชุด",
+        "each": "36000",
+        "sum": "72000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "2",
+        "name": "ตู้สำหรับจัดเก็บเครื่องคอมพิวเตอร์และอุปกรณ์ แบบที่ 1 (ขนาด 36U)  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "ตู้",
+        "each": "18000",
+        "sum": "18000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "3",
+        "name": "อุปกรณ์กระจายสัญญาณ (L2 Switch) ขนาด 24 ช่อง แบบที่ 2  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "13000",
+        "sum": "13000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "4",
+        "name": "เครื่องสำรองไฟ ขนาด 800 VA  [ราคากลาง ICT]",
+        "qty": "2",
+        "unit": "เครื่อง",
+        "each": "2500",
+        "sum": "5000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "5",
+        "name": "เครื่องสำรองไฟฟ้า ขนาด 2 kVA  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "12000",
+        "sum": "12000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "6",
+        "name": "จอภาพชนิด VDO wall ขนาด 55 นิ้ว (LCD Video Wall Module)",
+        "qty": "8",
+        "unit": "เครื่อง",
+        "each": "155000",
+        "sum": "1240000",
+        "fill": ""
+      },
+      {
+        "no": "7",
+        "name": "อุปกรณ์ควบคุมจอ Video Wall (Video Wall Controller)",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "512000",
+        "sum": "512000",
+        "fill": ""
+      },
+      {
+        "no": "8",
+        "name": "ระบบแสดงผลรองรับฐานข้อมูลเมืองอัจฉริยะ (Smart City Data Platform)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2097000",
+        "sum": "2097000",
+        "fill": ""
+      },
+      {
+        "no": "9",
+        "name": "โต๊ะคอมพิวเตอร์ มีลิ้นชักเก็บของ ขนาด 120 x 60 x 75 ซม.",
+        "qty": "2",
+        "unit": "ชุด",
+        "each": "14000",
+        "sum": "28000",
+        "fill": ""
+      },
+      {
+        "no": "10",
+        "name": "เก้าอี้ทำงานแบบมีพนักพิง ปรับความสูงได้",
+        "qty": "4",
+        "unit": "ชุด",
+        "each": "4000",
+        "sum": "16000",
+        "fill": ""
+      },
+      {
+        "no": "11",
+        "name": "งานปรับปรุงห้องศูนย์ข้อมูลและศูนย์เผชิญเหตุ (War room)",
+        "qty": "1",
+        "unit": "งาน",
+        "each": "896000",
+        "sum": "896000",
+        "fill": ""
+      }
+    ],
+    "total": {
+      "label": "รวมเป็นเงินทั้งสิ้น (รวมภาษีมูลค่าเพิ่มแล้ว)",
+      "amount": "4909000",
+      "labelStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": null
+      },
+      "amountStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    },
+    "notes": [
+      {
+        "text": "หมายเหตุ : ราคารวมภาษีมูลค่าเพิ่ม (VAT 7%) แล้ว / ยืนราคา 90 วัน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "#548235",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "borderColor": "#B0B0B0"
+  },
+  "ใบเสนอราคา_ระบบประชาสัมพันธ์": {
+    "title": {
+      "text": "ใบเสนอราคา",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 20,
+        "bold": true,
+        "italic": false,
+        "color": "#1F4E78",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "company": {
+      "text": "ProTech",
+      "style": {
+        "fontFamily": "TH Sarabun New",
+        "size": 16,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      }
+    },
+    "details": [
+      {
+        "text": "เสนอต่อ  องค์การบริหารส่วนตำบลท่าตูม อำเภอศรีมหาโพธิ จังหวัดปราจีนบุรี",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": false,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "center",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบสื่อสารและประชาสัมพันธ์ข้อมูลข่าวสาร รองรับนโยบาย Smart Thatoom",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "left",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "วันที่ 12 สิงหาคม 2569",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 13,
+          "bold": true,
+          "italic": false,
+          "color": "",
+          "fill": "",
+          "align": "right",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "headers": [
+      {
+        "text": "ลำดับ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "จำนวน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "หน่วย",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคาต่อหน่วย (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      },
+      {
+        "text": "ราคารวม (บาท)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 14,
+          "bold": true,
+          "italic": false,
+          "color": "#FFFFFF",
+          "fill": "#1F4E78",
+          "align": "center",
+          "wrap": true,
+          "decimals": null
+        }
+      }
+    ],
+    "columns": [
+      6,
+      58,
+      9,
+      10,
+      18,
+      20
+    ],
+    "columnStyles": [
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "left",
+        "wrap": true,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "center",
+        "wrap": false,
+        "decimals": null
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      },
+      {
+        "fontFamily": "TH Sarabun New",
+        "size": 13,
+        "bold": false,
+        "italic": false,
+        "color": "",
+        "fill": "#E2EFDA",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    ],
+    "items": [
+      {
+        "no": "1",
+        "name": "เครื่องคอมพิวเตอร์แม่ข่าย แบบที่ 1  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "150000",
+        "sum": "150000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "2",
+        "name": "เครื่องสำรองไฟฟ้า ขนาด 2 kVA  [ราคากลาง ICT]",
+        "qty": "1",
+        "unit": "เครื่อง",
+        "each": "12000",
+        "sum": "12000",
+        "fill": "#E2EFDA"
+      },
+      {
+        "no": "3",
+        "name": "ระบบฐานข้อมูลและการบริการจัดการสื่อมัลติมีเดีย (Multimedia Database and Management)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2450000",
+        "sum": "2450000",
+        "fill": ""
+      },
+      {
+        "no": "4",
+        "name": "ระบบเชื่อมโยงข้อมูลสื่อมัลติมีเดีย (Multimedia Link Portal)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2210000",
+        "sum": "2210000",
+        "fill": ""
+      },
+      {
+        "no": "5",
+        "name": "ระบบแสดงสื่อมัลติมีเดีย (Multimedia System)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "2008000",
+        "sum": "2008000",
+        "fill": ""
+      },
+      {
+        "no": "6",
+        "name": "ระบบบริการจัดการผู้ใช้งานและการแจ้งเตือน (User Management and Notification System)",
+        "qty": "1",
+        "unit": "ระบบ",
+        "each": "1911000",
+        "sum": "1911000",
+        "fill": ""
+      }
+    ],
+    "total": {
+      "label": "รวมเป็นเงินทั้งสิ้น (รวมภาษีมูลค่าเพิ่มแล้ว)",
+      "amount": "8741000",
+      "labelStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": null
+      },
+      "amountStyle": {
+        "fontFamily": "TH Sarabun New",
+        "size": 14,
+        "bold": true,
+        "italic": false,
+        "color": "",
+        "fill": "#FCE4D6",
+        "align": "right",
+        "wrap": false,
+        "decimals": 0
+      }
+    },
+    "notes": [
+      {
+        "text": "หมายเหตุ : ราคารวมภาษีมูลค่าเพิ่ม (VAT 7%) แล้ว / ยืนราคา 90 วัน",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      },
+      {
+        "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
+        "style": {
+          "fontFamily": "TH Sarabun New",
+          "size": 12,
+          "bold": false,
+          "italic": true,
+          "color": "#548235",
+          "fill": "",
+          "align": "",
+          "wrap": false,
+          "decimals": null
+        }
+      }
+    ],
+    "borderColor": "#B0B0B0"
+  }
+}

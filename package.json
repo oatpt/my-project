@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "scan-files": "node scripts/scan-files.mjs",
+    "extract-quotations": "node scripts/extract-quotations.mjs",
+    "prepare-data": "npm run scan-files && npm run extract-quotations",
     "quotations": "node scripts/quotations-to-pdf.mjs",
-    "predev": "npm run scan-files",
+    "predev": "npm run prepare-data",
     "dev": "vite",
-    "prebuild": "npm run scan-files",
+    "prebuild": "npm run prepare-data",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

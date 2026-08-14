@@ -143,11 +143,47 @@
   }
 }
 
-/* อยู่ท้ายหน้า ถัดจากข้อมูลสินค้า จึงขีดเส้นคั่นให้เห็นว่าคนละส่วนกัน */
-.attachments {
-  margin-bottom: 2rem;
+/* ปุ่มขอใบเสนอราคากับบล็อกไฟล์อยู่ท้ายหน้า ถัดจากข้อมูลสินค้า
+   ตัวไหนมาต่อจากข้อมูลทางเทคนิคก็ขีดเส้นคั่นให้เห็นว่าคนละส่วนกัน */
+.additional-content + .quotation-cta,
+.additional-content + .attachments {
   padding-top: 2rem;
   border-top: 1px solid #e0e0e0;
+}
+
+.quotation-cta {
+  margin-bottom: 2rem;
+}
+
+.quotation-request {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.6rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--accent-blue);
+  color: var(--primary);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.quotation-request:hover {
+  background-color: var(--secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.quotation-cta-note {
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.attachments {
+  margin-bottom: 2rem;
 }
 
 .attachments-title {

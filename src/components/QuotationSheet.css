@@ -1,0 +1,53 @@
+/* File: src/components/QuotationSheet.css */
+
+/*
+  หน้าตาของ "กระดาษ" ใบเสนอราคา
+  ที่นี่ที่เดียวคือรูปแบบของใบเสนอราคาทั้งเว็บและ PDF — scripts/quotations-to-pdf.mjs
+  อ่านไฟล์นี้ไปแปะในหน้า HTML ที่พิมพ์เป็น PDF ด้วย จะได้ไม่มีวันเพี้ยนจากกันเอง
+
+  สี ขนาดตัวอักษร ตัวหนา และการจัดชิด ไม่ได้เขียนไว้ที่นี่ แต่อ่านมาจากไฟล์ .xlsx
+  ต้นฉบับแล้วใส่เป็น inline style ให้แต่ละช่อง (ดู scripts/lib/quotation-xlsx.mjs)
+  แก้สีหรือขนาดตัวอักษรที่ไฟล์ excel แล้วทั้งเว็บและ PDF จะเปลี่ยนตาม
+*/
+
+.q-sheet {
+  /* ฟอนต์ในไฟล์ต้นฉบับคือ TH Sarabun New ที่เหลือคือตัวสำรองเผื่อเครื่องที่ไม่มี */
+  font-family: "TH Sarabun New", "TH SarabunPSK", "Sarabun", "Leelawadee UI", "Tahoma", sans-serif;
+  font-size: 13pt;
+  line-height: 1.25;
+  color: #000;
+  background: #fff;
+}
+
+.q-sheet * {
+  box-sizing: border-box;
+}
+
+/* บรรทัดหัวเอกสาร: ชื่อเอกสาร ชื่อบริษัท เสนอต่อ โครงการ วันที่ */
+.q-line {
+  margin: 0 0 2pt;
+}
+
+.q-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8pt;
+  table-layout: fixed;
+}
+
+.q-table th,
+.q-table td {
+  border: 1px solid var(--q-border, #b0b0b0);
+  padding: 2pt 5pt;
+  vertical-align: middle;
+  /* ปล่อยให้เบราว์เซอร์ตัดบรรทัดตามคำไทย ถ้าบังคับ break-word คำอย่าง "หน่วย" จะโดนหั่นกลางคำ */
+  overflow-wrap: normal;
+}
+
+.q-notes {
+  margin-top: 8pt;
+}
+
+.q-note {
+  margin: 0 0 2pt;
+}
