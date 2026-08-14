@@ -12,7 +12,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "company": {
       "text": "ProTech",
@@ -26,7 +27,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "details": [
       {
@@ -41,7 +43,8 @@
           "align": "center",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบฐานข้อมูลเมืองเพื่อรองรับการพัฒนาเมืองอัจฉริยะ (City Data Platform) รองรับนโยบาย Smart Thatoom",
@@ -55,7 +58,8 @@
           "align": "left",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 40
       },
       {
         "text": "วันที่ 12 สิงหาคม 2569",
@@ -69,7 +73,8 @@
           "align": "right",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": 22
       }
     ],
     "headers": [
@@ -85,7 +90,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "รายการ",
@@ -99,7 +105,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "จำนวน",
@@ -113,7 +120,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "หน่วย",
@@ -127,7 +135,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคาต่อหน่วย (บาท)",
@@ -141,7 +150,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคารวม (บาท)",
@@ -155,9 +165,11 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       }
     ],
+    "headerHt": 34,
     "columns": [
       6,
       58,
@@ -242,7 +254,8 @@
         "unit": "เครื่อง",
         "each": "150000",
         "sum": "150000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "2",
@@ -251,7 +264,8 @@
         "unit": "เครื่อง",
         "each": "220000",
         "sum": "220000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "3",
@@ -260,7 +274,8 @@
         "unit": "เครื่อง",
         "each": "13000",
         "sum": "13000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "4",
@@ -269,7 +284,8 @@
         "unit": "ตู้",
         "each": "22000",
         "sum": "22000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "5",
@@ -278,7 +294,8 @@
         "unit": "เครื่อง",
         "each": "12000",
         "sum": "12000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "6",
@@ -287,7 +304,8 @@
         "unit": "ระบบ",
         "each": "2672000",
         "sum": "2672000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "7",
@@ -296,7 +314,8 @@
         "unit": "ระบบ",
         "each": "2273000",
         "sum": "2273000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "8",
@@ -305,7 +324,8 @@
         "unit": "ระบบ",
         "each": "2443000",
         "sum": "2443000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "9",
@@ -314,7 +334,8 @@
         "unit": "ระบบ",
         "each": "2560000",
         "sum": "2560000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       }
     ],
     "total": {
@@ -341,7 +362,8 @@
         "align": "right",
         "wrap": false,
         "decimals": 0
-      }
+      },
+      "ht": null
     },
     "notes": [
       {
@@ -356,7 +378,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
@@ -370,7 +393,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       }
     ],
     "borderColor": "#B0B0B0"
@@ -388,7 +412,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "company": {
       "text": "ProTech",
@@ -402,7 +427,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "details": [
       {
@@ -417,7 +443,8 @@
           "align": "center",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบโครงสร้างพื้นฐานแอปพลิเคชันสมาร์ทท่าตูม เพื่อรองรับการพัฒนาเมืองอัจฉริยะ Smart Thatoom (Smart Thatoom Super App)",
@@ -431,7 +458,8 @@
           "align": "left",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 40
       },
       {
         "text": "วันที่ 12 สิงหาคม 2569",
@@ -445,7 +473,8 @@
           "align": "right",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": 22
       }
     ],
     "headers": [
@@ -461,7 +490,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "รายการ",
@@ -475,7 +505,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "จำนวน",
@@ -489,7 +520,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "หน่วย",
@@ -503,7 +535,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคาต่อหน่วย (บาท)",
@@ -517,7 +550,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคารวม (บาท)",
@@ -531,9 +565,11 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       }
     ],
+    "headerHt": 34,
     "columns": [
       6,
       58,
@@ -618,7 +654,8 @@
         "unit": "เครื่อง",
         "each": "150000",
         "sum": "150000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "2",
@@ -627,7 +664,8 @@
         "unit": "เครื่อง",
         "each": "12000",
         "sum": "12000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "3",
@@ -636,7 +674,8 @@
         "unit": "ระบบ",
         "each": "2227000",
         "sum": "2227000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "4",
@@ -645,7 +684,8 @@
         "unit": "ระบบ",
         "each": "2903000",
         "sum": "2903000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "5",
@@ -654,7 +694,8 @@
         "unit": "ระบบ",
         "each": "1738000",
         "sum": "1738000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "6",
@@ -663,7 +704,8 @@
         "unit": "ระบบ",
         "each": "2495000",
         "sum": "2495000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       }
     ],
     "total": {
@@ -690,7 +732,8 @@
         "align": "right",
         "wrap": false,
         "decimals": 0
-      }
+      },
+      "ht": null
     },
     "notes": [
       {
@@ -705,7 +748,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
@@ -719,7 +763,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       }
     ],
     "borderColor": "#B0B0B0"
@@ -737,7 +782,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "company": {
       "text": "ProTech",
@@ -751,7 +797,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "details": [
       {
@@ -766,7 +813,8 @@
           "align": "center",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบศูนย์ข้อมูลและศูนย์เผชิญเหตุ (War Room) รองรับนโยบาย Smart Thatoom",
@@ -780,7 +828,8 @@
           "align": "left",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 40
       },
       {
         "text": "วันที่ 12 สิงหาคม 2569",
@@ -794,7 +843,8 @@
           "align": "right",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": 22
       }
     ],
     "headers": [
@@ -810,7 +860,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "รายการ",
@@ -824,7 +875,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "จำนวน",
@@ -838,7 +890,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "หน่วย",
@@ -852,7 +905,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคาต่อหน่วย (บาท)",
@@ -866,7 +920,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคารวม (บาท)",
@@ -880,9 +935,11 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       }
     ],
+    "headerHt": 34,
     "columns": [
       6,
       58,
@@ -967,7 +1024,8 @@
         "unit": "ชุด",
         "each": "36000",
         "sum": "72000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "2",
@@ -976,7 +1034,8 @@
         "unit": "ตู้",
         "each": "18000",
         "sum": "18000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "3",
@@ -985,7 +1044,8 @@
         "unit": "เครื่อง",
         "each": "13000",
         "sum": "13000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "4",
@@ -994,7 +1054,8 @@
         "unit": "เครื่อง",
         "each": "2500",
         "sum": "5000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "5",
@@ -1003,7 +1064,8 @@
         "unit": "เครื่อง",
         "each": "12000",
         "sum": "12000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "6",
@@ -1012,7 +1074,8 @@
         "unit": "เครื่อง",
         "each": "155000",
         "sum": "1240000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "7",
@@ -1021,7 +1084,8 @@
         "unit": "เครื่อง",
         "each": "512000",
         "sum": "512000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "8",
@@ -1030,7 +1094,8 @@
         "unit": "ระบบ",
         "each": "2097000",
         "sum": "2097000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "9",
@@ -1039,7 +1104,8 @@
         "unit": "ชุด",
         "each": "14000",
         "sum": "28000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "10",
@@ -1048,7 +1114,8 @@
         "unit": "ชุด",
         "each": "4000",
         "sum": "16000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "11",
@@ -1057,7 +1124,8 @@
         "unit": "งาน",
         "each": "896000",
         "sum": "896000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       }
     ],
     "total": {
@@ -1084,7 +1152,8 @@
         "align": "right",
         "wrap": false,
         "decimals": 0
-      }
+      },
+      "ht": null
     },
     "notes": [
       {
@@ -1099,7 +1168,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
@@ -1113,7 +1183,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       }
     ],
     "borderColor": "#B0B0B0"
@@ -1131,7 +1202,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "company": {
       "text": "ProTech",
@@ -1145,7 +1217,8 @@
         "align": "center",
         "wrap": false,
         "decimals": null
-      }
+      },
+      "ht": null
     },
     "details": [
       {
@@ -1160,7 +1233,8 @@
           "align": "center",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "โครงการ : โครงการจัดหาครุภัณฑ์ระบบสื่อสารและประชาสัมพันธ์ข้อมูลข่าวสาร รองรับนโยบาย Smart Thatoom",
@@ -1174,7 +1248,8 @@
           "align": "left",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 40
       },
       {
         "text": "วันที่ 12 สิงหาคม 2569",
@@ -1188,7 +1263,8 @@
           "align": "right",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": 22
       }
     ],
     "headers": [
@@ -1204,7 +1280,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "รายการ",
@@ -1218,7 +1295,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "จำนวน",
@@ -1232,7 +1310,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "หน่วย",
@@ -1246,7 +1325,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคาต่อหน่วย (บาท)",
@@ -1260,7 +1340,8 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       },
       {
         "text": "ราคารวม (บาท)",
@@ -1274,9 +1355,11 @@
           "align": "center",
           "wrap": true,
           "decimals": null
-        }
+        },
+        "ht": 34
       }
     ],
+    "headerHt": 34,
     "columns": [
       6,
       58,
@@ -1361,7 +1444,8 @@
         "unit": "เครื่อง",
         "each": "150000",
         "sum": "150000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "2",
@@ -1370,7 +1454,8 @@
         "unit": "เครื่อง",
         "each": "12000",
         "sum": "12000",
-        "fill": "#E2EFDA"
+        "fill": "#E2EFDA",
+        "ht": null
       },
       {
         "no": "3",
@@ -1379,7 +1464,8 @@
         "unit": "ระบบ",
         "each": "2450000",
         "sum": "2450000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "4",
@@ -1388,7 +1474,8 @@
         "unit": "ระบบ",
         "each": "2210000",
         "sum": "2210000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "5",
@@ -1397,7 +1484,8 @@
         "unit": "ระบบ",
         "each": "2008000",
         "sum": "2008000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       },
       {
         "no": "6",
@@ -1406,7 +1494,8 @@
         "unit": "ระบบ",
         "each": "1911000",
         "sum": "1911000",
-        "fill": ""
+        "fill": "",
+        "ht": null
       }
     ],
     "total": {
@@ -1433,7 +1522,8 @@
         "align": "right",
         "wrap": false,
         "decimals": 0
-      }
+      },
+      "ht": null
     },
     "notes": [
       {
@@ -1448,7 +1538,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       },
       {
         "text": "รายการ [ราคากลาง ICT] ตรึงราคาตามราคากลางครุภัณฑ์คอมพิวเตอร์ (อ้างอิงชุดใบเสนอราคาโครงการ)",
@@ -1462,7 +1553,8 @@
           "align": "",
           "wrap": false,
           "decimals": null
-        }
+        },
+        "ht": null
       }
     ],
     "borderColor": "#B0B0B0"

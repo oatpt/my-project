@@ -154,10 +154,13 @@ function readSheet(zip) {
         .filter((w) => w > 0);
 
     const rows = [];
-    for (const row of xml.matchAll(/<row[^>]*r="(\d+)"[^>]*>([\s\S]*?)<\/row>/g)) {
+    for (const row of xml.matchAll(/<row([^>]*)r="(\d+)"[^>]*>([\s\S]*?)<\/row>/g)) {
+        // ความสูงแถวที่ตั้งไว้เอง (หน่วย pt) แถวที่ไม่ได้ตั้งใช้ความสูงปกติ
+        const fullAttrs = row[0].slice(0, row[0].indexOf('>'));
+        const ht = /ht="([\d.]+)"/.exec(fullAttrs)?.[1];
         const cells = {};
         const styles = {};
-        for (const c of row[2].matchAll(/<c([^>]*)>([\s\S]*?)<\/c>/g)) {
+        for (const c of row[3].matchAll(/<c([^>]*)>([\s\S]*?)<\/c>/g)) {
             const column = /r="([A-Z]+)\d+"/.exec(c[1])?.[1];
             if (!column) continue;
             const type = /t="([^"]+)"/.exec(c[1])?.[1] ?? 'n';
@@ -174,7 +177,7 @@ function readSheet(zip) {
                 styles[column] = Number(/s="(\d+)"/.exec(c[1])?.[1] ?? 0);
             }
         }
-        if (Object.keys(cells).length) rows.push({ cells, styles });
+        if (Object.keys(cells).length) rows.push({ cells, styles, ht: ht ? Number(ht) : null });
     }
     return { rows, columns };
 }
@@ -194,11 +197,13 @@ function toDocument({ rows, columns }, { cellXfs, borderColor }) {
     const line = (row, column = 'A') => ({
         text: row.cells[column] ?? '',
         style: styleOf(row.styles[column]),
+        ht: row.ht,
     });
 
     const head = [];
     const items = [];
     let headers = [];
+    let headerHt = null;
     let columnStyles = [];
     let total = null;
     const notes = [];
@@ -210,6 +215,7 @@ function toDocument({ rows, columns }, { cellXfs, borderColor }) {
         if (a === 'ลำดับ') {
             seenHeader = true;
             headers = COLUMNS.map((column) => line(row, column));
+            headerHt = row.ht;
             continue;
         }
         if (!seenHeader) {
@@ -228,6 +234,7 @@ function toDocument({ rows, columns }, { cellXfs, borderColor }) {
                 sum: row.cells.F ?? '',
                 // แถวที่ระบายสีไว้ในไฟล์ต้นฉบับ (ชุดนี้ใช้กับรายการที่อิงราคากลาง ICT)
                 fill: styleOf(row.styles.A).fill ?? '',
+                ht: row.ht,
             });
         } else if (row.cells.F !== undefined && total === null) {
             total = {
@@ -235,6 +242,7 @@ function toDocument({ rows, columns }, { cellXfs, borderColor }) {
                 amount: row.cells.F,
                 labelStyle: styleOf(row.styles.A),
                 amountStyle: styleOf(row.styles.F),
+                ht: row.ht,
             };
         } else if (a) {
             notes.push(line(row));
@@ -244,10 +252,11 @@ function toDocument({ rows, columns }, { cellXfs, borderColor }) {
     // แถว 1-2 คือ "ใบเสนอราคา" กับชื่อบริษัท ที่เหลือเป็นรายละเอียดหัวเอกสาร
     const [title, company, ...details] = head;
     return {
-        title: title ?? { text: 'ใบเสนอราคา', style: {} },
-        company: company ?? { text: '', style: {} },
+        title: title ?? { text: 'ใบเสนอราคา', style: {}, ht: null },
+        company: company ?? { text: '', style: {}, ht: null },
         details,
         headers,
+        headerHt,
         columns,
         columnStyles,
         items,

@@ -51,8 +51,18 @@ const css = (style = {}, fill) => {
         .join(';');
 };
 
-const line = (item, className) =>
-    `<p class="${className}" style="${css(item.style)}">${escapeHtml(item.text)}</p>`;
+/** บรรทัดหัวเอกสาร: ความสูงแถวจากไฟล์ทำเป็นความสูงขั้นต่ำ จัดกึ่งกลางแนวตั้งแบบ excel */
+const line = (item, className) => {
+    let style = css(item.style);
+    if (item.ht) {
+        const justify =
+            item.style?.align === 'right' ? 'flex-end' : item.style?.align === 'center' ? 'center' : '';
+        style += `;min-height:${item.ht}pt;display:flex;align-items:center${justify ? `;justify-content:${justify}` : ''}`;
+    }
+    return `<p class="${className}" style="${style}">${escapeHtml(item.text)}</p>`;
+};
+
+const rowHt = (ht) => (ht ? ` style="height:${ht}pt"` : '');
 
 /**
  * หน้ากระดาษใช้คลาสและไฟล์ CSS ชุดเดียวกับฟอร์มขอใบเสนอราคาในเว็บ
@@ -68,7 +78,9 @@ function renderHtml(doc) {
 <meta charset="utf-8">
 <title>${escapeHtml(doc.title.text)}</title>
 <style>
-@page { size: A4 portrait; margin: 14mm 13mm; }
+/* ขนาดกระดาษตามไฟล์ต้นฉบับ: Letter แนวนอน ขอบซ้ายขวา 0.75" บนล่าง 1"
+   (ค่าเดียวกับ pageMargins ในไฟล์ .xlsx และเท่ากับ PDF ที่ export จาก Excel) */
+@page { size: letter landscape; margin: 1in 0.75in; }
 body { margin: 0; }
 ${sheetCss}
 </style>
@@ -84,14 +96,14 @@ ${sheetCss}
         ${doc.columns.map((w) => `<col style="width:${((w / totalWidth) * 100).toFixed(3)}%">`).join('')}
       </colgroup>
       <thead>
-        <tr>${doc.headers.map((h) => `<th style="${css(h.style)}">${escapeHtml(h.text)}</th>`).join('')}</tr>
+        <tr${rowHt(doc.headerHt)}>${doc.headers.map((h) => `<th style="${css(h.style)}">${escapeHtml(h.text)}</th>`).join('')}</tr>
       </thead>
       <tbody>
         ${doc.items
             .map((item, index) => {
                 const cell = (value, column) =>
                     `<td style="${css(doc.columnStyles[column], item.fill)}">${escapeHtml(value)}</td>`;
-                return `<tr>
+                return `<tr${rowHt(item.ht)}>
           ${cell(String(index + 1), 0)}
           ${cell(item.name, 1)}
           ${cell(item.qty, 2)}
@@ -105,7 +117,7 @@ ${sheetCss}
       ${
           doc.total
               ? `<tfoot>
-        <tr>
+        <tr${rowHt(doc.total.ht)}>
           <td colspan="5" style="${css(doc.total.labelStyle)}">${escapeHtml(doc.total.label)}</td>
           <td style="${css(doc.total.amountStyle)}">${escapeHtml(format(doc.total.amount, doc.total.amountStyle))}</td>
         </tr>

@@ -58,6 +58,8 @@ export interface QuotationCellStyle {
 export interface QuotationLine {
   text: string;
   style: QuotationCellStyle;
+  /** ความสูงแถวที่ตั้งไว้ในไฟล์ (pt); null คือความสูงปกติ */
+  ht?: number | null;
 }
 
 /** รายการหนึ่งบรรทัดในใบเสนอราคา ค่าทุกช่องเป็น string เพราะอ่านมาจากเซลล์ใน .xlsx ตรง ๆ */
@@ -76,6 +78,8 @@ export interface QuotationItem {
   sum: string;
   /** สีพื้นของแถวตามที่ระบายไว้ในไฟล์ต้นฉบับ "" คือไม่ระบาย */
   fill: string;
+  /** ความสูงแถวที่ตั้งไว้ในไฟล์ (pt); null คือความสูงปกติ */
+  ht?: number | null;
 }
 
 /**
@@ -92,6 +96,8 @@ export interface Quotation {
   details: QuotationLine[];
   /** หัวตาราง 6 ช่อง ลำดับ / รายการ / จำนวน / หน่วย / ราคาต่อหน่วย / ราคารวม */
   headers: QuotationLine[];
+  /** ความสูงแถวหัวตาราง (pt) */
+  headerHt?: number | null;
   /** ความกว้างคอลัมน์ตามหน่วยของ excel */
   columns: number[];
   /** รูปแบบของแต่ละคอลัมน์ในตาราง (เอามาจากรายการแถวแรก) */
@@ -103,6 +109,7 @@ export interface Quotation {
     amount: string;
     labelStyle: QuotationCellStyle;
     amountStyle: QuotationCellStyle;
+    ht?: number | null;
   } | null;
   /** หมายเหตุใต้ตาราง */
   notes: QuotationLine[];

@@ -2,8 +2,10 @@
 //
 // ฟอร์ม "ขอใบเสนอราคา" — เปิดจากหน้ารายละเอียดสินค้า
 //
-// บนจอเป็นฟอร์มกรอกธรรมดา สูงไม่เกินหน้าจอ เลื่อนดูข้างในได้
-// รายการแยกเป็นสองกลุ่ม: ตามราคากลาง ICT กับนอกราคากลาง
+// บนจอเป็นฟอร์มกรอก สูงไม่เกินหน้าจอ เลื่อนดูข้างในได้ กติกาของฟอร์ม:
+// - หัวเอกสารกับหมายเหตุ แสดงเฉย ๆ แก้ไม่ได้ วันที่เป็นวันที่วันนี้เสมอ
+// - รายการตามราคากลาง ICT แก้ได้เฉพาะจำนวน (ชื่อ หน่วย ราคา ล็อกตามราคากลาง)
+// - รายการนอกราคากลาง แก้ได้ทุกช่อง เพิ่ม/ลบได้
 //
 // ส่วน "เอกสาร" มีเฉพาะตอนสั่งพิมพ์ — แผ่นกระดาษถูกซ่อนไว้ในหน้า พอสั่งพิมพ์
 // ฟอร์มจะหายไปเหลือแต่กระดาษ ซึ่งจัดหน้าตามรูปแบบที่อ่านมาจากไฟล์ .xlsx ต้นฉบับ
@@ -29,12 +31,8 @@ interface DraftItem {
     each: string;
     /** สีพื้นของแถวในไฟล์ต้นฉบับ ใช้เป็นตัวบอกด้วยว่าเป็นรายการตามราคากลาง ICT */
     fill: string;
-}
-
-interface Draft {
-    details: string[];
-    items: DraftItem[];
-    notes: string[];
+    /** ความสูงแถวที่ตั้งไว้ในไฟล์ (pt) ใช้ตอนพิมพ์ */
+    ht?: number | null;
 }
 
 /** "14 สิงหาคม 2569" — th-TH ให้ปีพุทธศักราชอยู่แล้ว */
@@ -69,28 +67,31 @@ const cellStyle = (style: QuotationCellStyle | undefined, fill?: string): CSSPro
     };
 };
 
-/**
- * ตั้งต้นฟอร์มจากใบเสนอราคาของโครงการ โดย
- * - จำนวนตั้งเป็น 1 ทุกรายการ ตารางที่เห็นตอนเปิดจึงเป็นราคาต่อหน่วยล้วน ๆ
- * - วันที่เปลี่ยนเป็นวันที่วันนี้ ไม่ใช่วันที่ในไฟล์ต้นฉบับ
- */
-const makeDraft = (quotation: Quotation): Draft => {
-    const details = quotation.details.map((line) => (isDateLine(line.text) ? todayLine() : line.text));
-    if (!details.some(isDateLine)) details.push(todayLine());
-
+/** บรรทัดหัวเอกสาร: ความสูงแถวจากไฟล์ทำเป็นความสูงขั้นต่ำ จัดกึ่งกลางแนวตั้งแบบ excel */
+const lineStyle = (style: QuotationCellStyle | undefined, ht?: number | null): CSSProperties => {
+    const base = cellStyle(style);
+    if (!ht) return base;
+    const align = style?.align;
     return {
-        details,
-        items: quotation.items.map((item, index) => ({
-            key: index,
-            name: item.name,
-            qty: '1',
-            unit: item.unit,
-            each: item.each,
-            fill: item.fill,
-        })),
-        notes: quotation.notes.map((note) => note.text),
+        ...base,
+        minHeight: `${ht}pt`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: align === 'right' ? 'flex-end' : align === 'center' ? 'center' : undefined,
     };
 };
+
+/** ตั้งต้นรายการจากใบเสนอราคาของโครงการ จำนวนเป็น 1 ทุกรายการ = ราคาต่อหน่วยล้วน ๆ */
+const makeItems = (quotation: Quotation): DraftItem[] =>
+    quotation.items.map((item, index) => ({
+        key: index,
+        name: item.name,
+        qty: '1',
+        unit: item.unit,
+        each: item.each,
+        fill: item.fill,
+        ht: item.ht,
+    }));
 
 /** ขยายความสูงช่องกรอกตามข้อความ ไม่ให้ต้องเลื่อนอ่านในช่องแคบ ๆ */
 const autoSize = (el: HTMLTextAreaElement | null): void => {
@@ -137,20 +138,27 @@ const TextInput = ({
     );
 
 const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
-    const [draft, setDraft] = useState<Draft>(() => makeDraft(quotation));
+    const [items, setItems] = useState<DraftItem[]>(() => makeItems(quotation));
     const closeRef = useRef<HTMLButtonElement>(null);
 
     const columnStyles = quotation.columnStyles;
 
+    // หัวเอกสารแก้ไม่ได้ — เอาจากไฟล์ต้นฉบับ เปลี่ยนเฉพาะวันที่ให้เป็นวันนี้เสมอ
+    const details = useMemo(() => {
+        const lines = quotation.details.map((line) => (isDateLine(line.text) ? todayLine() : line.text));
+        if (!lines.some(isDateLine)) lines.push(todayLine());
+        return lines;
+    }, [quotation]);
+
     // ลำดับและราคารวมคิดจากตำแหน่งในรายการเต็ม (ลำดับเดียวกับที่จะพิมพ์ลงกระดาษ)
     const rows = useMemo(
         () =>
-            draft.items.map((item, index) => ({
+            items.map((item, index) => ({
                 ...item,
                 no: index + 1,
                 sum: toNumber(item.qty) * toNumber(item.each),
             })),
-        [draft.items],
+        [items],
     );
     const total = rows.reduce((sum, row) => sum + row.sum, 0);
 
@@ -172,48 +180,34 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
     }, [onClose]);
 
     const patchItem = (key: number, patch: Partial<DraftItem>) =>
-        setDraft((d) => ({
-            ...d,
-            items: d.items.map((item) => (item.key === key ? { ...item, ...patch } : item)),
-        }));
+        setItems((list) => list.map((item) => (item.key === key ? { ...item, ...patch } : item)));
 
     const addItem = () =>
-        setDraft((d) => ({
-            ...d,
-            items: [
-                ...d.items,
-                {
-                    key: Math.max(0, ...d.items.map((i) => i.key)) + 1,
-                    name: '',
-                    qty: '1',
-                    unit: '',
-                    each: '',
-                    fill: '',
-                },
-            ],
-        }));
+        setItems((list) => [
+            ...list,
+            { key: Math.max(0, ...list.map((i) => i.key)) + 1, name: '', qty: '1', unit: '', each: '', fill: '' },
+        ]);
 
-    const removeItem = (key: number) =>
-        setDraft((d) => ({ ...d, items: d.items.filter((item) => item.key !== key) }));
+    const removeItem = (key: number) => setItems((list) => list.filter((item) => item.key !== key));
 
-    const patchLine = (field: 'details' | 'notes', index: number, value: string) =>
-        setDraft((d) => ({
-            ...d,
-            [field]: d[field].map((line, i) => (i === index ? value : line)),
-        }));
+    const columnHeadings = (
+        <div className="qf-row qf-headings" aria-hidden="true">
+            <span className="qf-no">ลำดับ</span>
+            <span className="qf-cell-name">รายการ</span>
+            <span className="qf-cell-qty">จำนวน</span>
+            <span className="qf-cell-unit">หน่วย</span>
+            <span className="qf-cell-price">ราคาต่อหน่วย</span>
+            <span className="qf-sum">ราคารวม</span>
+            <span className="qf-remove-space"></span>
+        </div>
+    );
 
-    const itemRow = (row: (typeof rows)[number]) => (
+    /** แถวราคากลาง: แก้ได้เฉพาะจำนวน ชื่อ/หน่วย/ราคา ล็อกไว้ตามราคากลาง */
+    const standardRow = (row: (typeof rows)[number]) => (
         <div className="qf-row" key={row.key}>
             <span className="qf-no">{row.no}</span>
-            <div className="qf-cell qf-cell-name">
-                <TextInput
-                    multiline
-                    value={row.name}
-                    label={`รายการที่ ${row.no}`}
-                    onChange={(value) => patchItem(row.key, { name: value })}
-                />
-            </div>
-            <div className="qf-cell qf-cell-qty">
+            <span className="qf-cell-name qf-text">{row.name}</span>
+            <div className="qf-cell-qty">
                 <TextInput
                     align="center"
                     value={row.qty}
@@ -221,7 +215,37 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                     onChange={(value) => patchItem(row.key, { qty: value })}
                 />
             </div>
-            <div className="qf-cell qf-cell-unit">
+            <span className="qf-cell-unit qf-text qf-text-center">{row.unit}</span>
+            <span className="qf-cell-price qf-text qf-text-right">
+                {format(toNumber(row.each), columnStyles[4])}
+            </span>
+            <span className="qf-sum">{format(row.sum, columnStyles[5])}</span>
+            {/* รายการตามราคากลางลบไม่ได้ เว้นช่องไว้ให้ตรงคอลัมน์กับกลุ่มล่าง */}
+            <span className="qf-remove-space"></span>
+        </div>
+    );
+
+    /** แถวนอกราคากลาง: แก้ได้ทุกช่อง */
+    const customRow = (row: (typeof rows)[number]) => (
+        <div className="qf-row" key={row.key}>
+            <span className="qf-no">{row.no}</span>
+            <div className="qf-cell-name">
+                <TextInput
+                    multiline
+                    value={row.name}
+                    label={`รายการที่ ${row.no}`}
+                    onChange={(value) => patchItem(row.key, { name: value })}
+                />
+            </div>
+            <div className="qf-cell-qty">
+                <TextInput
+                    align="center"
+                    value={row.qty}
+                    label={`จำนวนของรายการที่ ${row.no}`}
+                    onChange={(value) => patchItem(row.key, { qty: value })}
+                />
+            </div>
+            <div className="qf-cell-unit">
                 <TextInput
                     align="center"
                     value={row.unit}
@@ -229,7 +253,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                     onChange={(value) => patchItem(row.key, { unit: value })}
                 />
             </div>
-            <div className="qf-cell qf-cell-price">
+            <div className="qf-cell-price">
                 <TextInput
                     align="right"
                     value={row.each}
@@ -250,18 +274,6 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
         </div>
     );
 
-    const columnHeadings = (
-        <div className="qf-row qf-headings" aria-hidden="true">
-            <span className="qf-no">ลำดับ</span>
-            <span className="qf-cell-name">รายการ</span>
-            <span className="qf-cell-qty">จำนวน</span>
-            <span className="qf-cell-unit">หน่วย</span>
-            <span className="qf-cell-price">ราคาต่อหน่วย</span>
-            <span className="qf-sum">ราคารวม</span>
-            <span className="qf-remove-space"></span>
-        </div>
-    );
-
     // แขวนไว้ใต้ body ไม่ใช่ใต้ #root เพราะตอนพิมพ์เราซ่อน #root ทั้งก้อนเพื่อให้เหลือแต่กระดาษ
     return createPortal(
         <div
@@ -276,7 +288,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                     <div>
                         <h3 className="quotation-title">ขอใบเสนอราคา</h3>
                         <p className="quotation-hint">
-                            จำนวนตั้งไว้ที่ 1 ทุกรายการ (ราคาต่อหน่วย) วันที่เป็นวันที่วันนี้ แก้ได้ทุกช่อง
+                            จำนวนตั้งไว้ที่ 1 ทุกรายการ วันที่เป็นวันที่วันนี้
                         </p>
                     </div>
                     <button type="button" className="q-button" ref={closeRef} onClick={onClose}>
@@ -285,41 +297,34 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                 </header>
 
                 <div className="qf-body">
-                    <section className="qf-section">
-                        <h4 className="qf-section-title">หัวเอกสาร</h4>
-                        {draft.details.map((line, index) => (
-                            <div className="qf-detail" key={index}>
-                                <TextInput
-                                    multiline
-                                    value={line}
-                                    label={`รายละเอียดบรรทัดที่ ${index + 1}`}
-                                    onChange={(value) => patchLine('details', index, value)}
-                                />
-                            </div>
+                    <section className="qf-doc-head">
+                        {details.map((line, index) => (
+                            <p
+                                className={`qf-doc-line${isDateLine(line) ? ' qf-doc-date' : ''}`}
+                                key={index}
+                            >
+                                {line}
+                            </p>
                         ))}
                     </section>
 
                     {standardRows.length > 0 && (
                         <section className="qf-section">
-                            <h4 className="qf-section-title">
-                                รายการตามราคากลาง ICT
-                                <span className="qf-badge qf-badge-standard">ราคากลาง</span>
-                            </h4>
-                            {columnHeadings}
-                            {standardRows.map(itemRow)}
+                            <h4 className="qf-section-title">รายการตามราคากลาง ICT</h4>
+                            <div className="qf-items">
+                                {columnHeadings}
+                                {standardRows.map(standardRow)}
+                            </div>
                         </section>
                     )}
 
                     <section className="qf-section">
-                        <h4 className="qf-section-title">
-                            รายการนอกราคากลาง
-                            <span className="qf-badge">กำหนดราคาเอง</span>
-                        </h4>
+                        <h4 className="qf-section-title">รายการนอกราคากลาง</h4>
                         {customRows.length > 0 ? (
-                            <>
+                            <div className="qf-items">
                                 {columnHeadings}
-                                {customRows.map(itemRow)}
-                            </>
+                                {customRows.map(customRow)}
+                            </div>
                         ) : (
                             <p className="qf-empty">ยังไม่มีรายการ</p>
                         )}
@@ -328,19 +333,15 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                         </button>
                     </section>
 
-                    <section className="qf-section">
-                        <h4 className="qf-section-title">หมายเหตุ</h4>
-                        {draft.notes.map((note, index) => (
-                            <div className="qf-detail" key={index}>
-                                <TextInput
-                                    multiline
-                                    value={note}
-                                    label={`หมายเหตุบรรทัดที่ ${index + 1}`}
-                                    onChange={(value) => patchLine('notes', index, value)}
-                                />
-                            </div>
-                        ))}
-                    </section>
+                    {quotation.notes.length > 0 && (
+                        <section className="qf-section">
+                            {quotation.notes.map((note, index) => (
+                                <p className="qf-note" key={index}>
+                                    {note.text}
+                                </p>
+                            ))}
+                        </section>
+                    )}
                 </div>
 
                 <footer className="quotation-footer">
@@ -349,7 +350,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                         <strong>{format(total, quotation.total?.amountStyle)} บาท</strong>
                     </div>
                     <div className="quotation-actions">
-                        <button type="button" className="q-button" onClick={() => setDraft(makeDraft(quotation))}>
+                        <button type="button" className="q-button" onClick={() => setItems(makeItems(quotation))}>
                             เริ่มใหม่
                         </button>
                         <button type="button" className="q-button q-button-primary" onClick={() => window.print()}>
@@ -364,14 +365,18 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                 className="q-sheet q-print-sheet"
                 style={{ '--q-border': quotation.borderColor } as CSSProperties}
             >
-                <p className="q-line" style={cellStyle(quotation.title.style)}>
+                <p className="q-line" style={lineStyle(quotation.title.style, quotation.title.ht)}>
                     {quotation.title.text}
                 </p>
-                <p className="q-line" style={cellStyle(quotation.company.style)}>
+                <p className="q-line" style={lineStyle(quotation.company.style, quotation.company.ht)}>
                     {quotation.company.text}
                 </p>
-                {draft.details.map((line, index) => (
-                    <p className="q-line" key={index} style={cellStyle(quotation.details[index]?.style)}>
+                {details.map((line, index) => (
+                    <p
+                        className="q-line"
+                        key={index}
+                        style={lineStyle(quotation.details[index]?.style, quotation.details[index]?.ht)}
+                    >
                         {line}
                     </p>
                 ))}
@@ -388,7 +393,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                         ))}
                     </colgroup>
                     <thead>
-                        <tr>
+                        <tr style={quotation.headerHt ? { height: `${quotation.headerHt}pt` } : undefined}>
                             {quotation.headers.map((header, index) => (
                                 <th key={index} style={cellStyle(header.style)}>
                                     {header.text}
@@ -398,7 +403,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                     </thead>
                     <tbody>
                         {rows.map((row) => (
-                            <tr key={row.key}>
+                            <tr key={row.key} style={row.ht ? { height: `${row.ht}pt` } : undefined}>
                                 <td style={cellStyle(columnStyles[0], row.fill)}>{row.no}</td>
                                 <td style={cellStyle(columnStyles[1], row.fill)}>{row.name}</td>
                                 <td style={cellStyle(columnStyles[2], row.fill)}>{row.qty}</td>
@@ -414,7 +419,7 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                     </tbody>
                     {quotation.total && (
                         <tfoot>
-                            <tr>
+                            <tr style={quotation.total.ht ? { height: `${quotation.total.ht}pt` } : undefined}>
                                 <td colSpan={5} style={cellStyle(quotation.total.labelStyle)}>
                                     {quotation.total.label}
                                 </td>
@@ -427,9 +432,9 @@ const QuotationDialog = ({ quotation, onClose }: QuotationDialogProps) => {
                 </table>
 
                 <div className="q-notes">
-                    {draft.notes.map((note, index) => (
-                        <p className="q-note" key={index} style={cellStyle(quotation.notes[index]?.style)}>
-                            {note}
+                    {quotation.notes.map((note, index) => (
+                        <p className="q-note" key={index} style={cellStyle(note.style)}>
+                            {note.text}
                         </p>
                     ))}
                 </div>
