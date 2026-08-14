@@ -126,8 +126,10 @@ export interface Product {
   picture: string;
   /** ชื่อโฟลเดอร์ของสินค้านี้ใน public/files/ — ไฟล์ในนั้นขึ้นหน้าเว็บอัตโนมัติ */
   folder: string;
-  /** คีย์ใบเสนอราคาของโครงการที่สินค้านี้อยู่ ใช้เป็นตั้งต้นของปุ่ม "ขอใบเสนอราคา" */
+  /** คีย์ใบเสนอราคาของโครงการที่สินค้านี้อยู่ ใช้เลือกตารางราคาที่จะแสดงในหน้าสินค้า */
   quotation?: string;
+  /** ชื่อรายการของสินค้านี้ในตารางราคา (ตรงกับ name ของ item ใน quotations.json) */
+  quotationItem?: string;
   attachments?: Attachment[];
   description: string;
   feature: Productlist[];

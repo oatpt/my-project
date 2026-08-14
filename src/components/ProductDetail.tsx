@@ -1,10 +1,8 @@
 // File: src/components/ProductDetail.tsx
-import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { AttachmentGroup, AttachmentIndex, Product, QuotationIndex } from '../types';
+import { AttachmentGroup, AttachmentIndex, Product, QuotationCellStyle, QuotationIndex } from '../types';
 import attachmentsData from '../data/attachments.json';
 import quotationsData from '../data/quotations.json';
-import QuotationDialog from './QuotationDialog';
 import './ProductDetail.css';
 
 interface ProductDetailProps {
@@ -19,10 +17,18 @@ interface ProductDetailProps {
 const attachmentIndex = attachmentsData as AttachmentIndex;
 
 /**
- * ใบเสนอราคาของแต่ละโครงการ ที่ scripts/extract-quotations.mjs แปลงมาจาก
- * quotations-source/*.xlsx ตอน build — ใช้เป็นค่าตั้งต้นของฟอร์ม "ขอใบเสนอราคา"
+ * ตารางราคาของแต่ละโครงการ ที่ scripts/extract-quotations.mjs แปลงมาจาก
+ * quotations-source/*.xlsx ตอน build — แสดงท้ายหน้าสินค้าของโครงการนั้น
  */
 const quotationIndex = quotationsData as QuotationIndex;
+
+/** จัดรูปแบบตัวเลขตามที่ตั้งไว้ในช่องนั้นของไฟล์ excel เช่น #,##0 -> "36,000" */
+const money = (value: string, style: QuotationCellStyle = {}): string => {
+    const n = Number(String(value).replace(/[,\s]/g, ''));
+    if (!Number.isFinite(n)) return value;
+    const decimals = style.decimals ?? 0;
+    return n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+};
 
 /**
  * ขนาดของทุกไฟล์ที่สแกนเจอ ไม่ว่าจะอยู่โฟลเดอร์ไหน
@@ -108,7 +114,6 @@ const buildAttachmentGroups = (product: Product): AttachmentGroup[] => {
 
 const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     const { productId } = useParams<{ productId: string }>();
-    const [askingQuotation, setAskingQuotation] = useState(false);
 
     if (loading) {
         return (
@@ -139,8 +144,12 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
     const showGroupTitles =
         attachmentGroups.length > 1 || attachmentGroups[0]?.group !== '';
 
-    // สินค้าที่ยังไม่ได้ผูกกับใบเสนอราคาโครงการไหน ก็ไม่ต้องมีปุ่มขอใบเสนอราคา
+    // สินค้าที่ยังไม่ได้ผูกกับโครงการไหน ก็ไม่มีตารางราคาให้แสดง
     const quotation = product.quotation ? quotationIndex[product.quotation] : undefined;
+    // รายการของสินค้าหน้านี้ในตาราง — ใช้เน้นแถวให้เห็นว่าราคาของหัวข้อนี้คือบรรทัดไหน
+    const ownItem = quotation?.items.find((item) => item.name === product.quotationItem);
+    // บรรทัด "โครงการ : ..." ในหัวใบเสนอราคา เอามาเป็นคำโปรยใต้หัวข้อตาราง
+    const projectLine = quotation?.details.find((line) => line.text.startsWith('โครงการ'))?.text;
 
     return (
         <section className="section product-detail">
@@ -182,17 +191,61 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
             </div>
 
             {quotation && (
-                <div className="quotation-cta">
-                    <button
-                        type="button"
-                        className="quotation-request"
-                        onClick={() => setAskingQuotation(true)}
-                    >
-                        <i className="fas fa-file-invoice-dollar"></i> ขอใบเสนอราคา
-                    </button>
-                    <p className="quotation-cta-note">
-                        เปิดใบเสนอราคาของโครงการนี้ขึ้นมาแก้ไขจำนวนและราคา แล้วสั่งพิมพ์หรือบันทึกเป็น PDF ได้เลย
-                    </p>
+                <div className="price-section">
+                    <h3 className="price-title">ตารางราคา</h3>
+                    {projectLine && <p className="price-project">{projectLine}</p>}
+
+                    {ownItem && (
+                        <p className="price-own">
+                            <span className="price-own-name">{ownItem.name}</span>
+                            <span className="price-own-amount">
+                                {money(ownItem.sum, quotation.columnStyles[5])} บาท
+                            </span>
+                        </p>
+                    )}
+
+                    <div className="price-table-wrap">
+                        <table className="price-table">
+                            <thead>
+                                <tr>
+                                    {quotation.headers.map((header, index) => (
+                                        <th key={index}>{header.text}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {quotation.items.map((item) => (
+                                    <tr
+                                        key={item.no}
+                                        className={item.name === product.quotationItem ? 'price-row-own' : undefined}
+                                    >
+                                        <td className="price-mid">{item.no}</td>
+                                        <td>{item.name}</td>
+                                        <td className="price-mid">{item.qty}</td>
+                                        <td className="price-mid">{item.unit}</td>
+                                        <td className="price-num">{money(item.each, quotation.columnStyles[4])}</td>
+                                        <td className="price-num">{money(item.sum, quotation.columnStyles[5])}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                            {quotation.total && (
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan={5}>{quotation.total.label}</td>
+                                        <td className="price-num">
+                                            {money(quotation.total.amount, quotation.total.amountStyle)}
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            )}
+                        </table>
+                    </div>
+
+                    <div className="price-notes">
+                        {quotation.notes.map((note, index) => (
+                            <p key={index}>{note.text}</p>
+                        ))}
+                    </div>
                 </div>
             )}
 
@@ -228,10 +281,6 @@ const ProductDetail = ({ products, loading }: ProductDetailProps) => {
                         </div>
                     ))}
                 </div>
-            )}
-
-            {quotation && askingQuotation && (
-                <QuotationDialog quotation={quotation} onClose={() => setAskingQuotation(false)} />
             )}
         </section>
     );

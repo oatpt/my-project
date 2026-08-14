@@ -143,43 +143,128 @@
   }
 }
 
-/* ปุ่มขอใบเสนอราคากับบล็อกไฟล์อยู่ท้ายหน้า ถัดจากข้อมูลสินค้า
+/* ตารางราคากับบล็อกไฟล์อยู่ท้ายหน้า ถัดจากข้อมูลสินค้า
    ตัวไหนมาต่อจากข้อมูลทางเทคนิคก็ขีดเส้นคั่นให้เห็นว่าคนละส่วนกัน */
-.additional-content + .quotation-cta,
+.additional-content + .price-section,
 .additional-content + .attachments {
   padding-top: 2rem;
   border-top: 1px solid #e0e0e0;
 }
 
-.quotation-cta {
+/* ---------------------------------------------------------------- ตารางราคา */
+
+.price-section {
   margin-bottom: 2rem;
 }
 
-.quotation-request {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.7rem 1.6rem;
-  border: none;
-  border-radius: 50px;
-  background-color: var(--accent-blue);
-  color: var(--primary);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+.price-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-blue);
 }
 
-.quotation-request:hover {
-  background-color: var(--secondary);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.quotation-cta-note {
-  margin: 0.6rem 0 0;
-  font-size: 0.9rem;
+.price-project {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
   color: #666;
+}
+
+/* ราคาของสินค้าหน้านี้ ชูขึ้นมาก่อนเข้าตารางเต็ม */
+.price-own {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 4px solid var(--accent-blue);
+  border-radius: 0 8px 8px 0;
+  background: #f2f7fc;
+}
+
+.price-own-name {
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.price-own-amount {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  white-space: nowrap;
+}
+
+/* ตารางกว้างกว่าจอแคบได้ ให้เลื่อนดูแนวนอนในกรอบของมันเอง */
+.price-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e2e6eb;
+  border-radius: 10px;
+}
+
+.price-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.price-table th,
+.price-table td {
+  padding: 0.6rem 0.8rem;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.price-table thead th {
+  background: var(--secondary);
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.price-table tbody tr + tr td {
+  border-top: 1px solid #eef1f5;
+}
+
+.price-mid {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.price-num {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* แถวของสินค้าหน้านี้ — ราคาที่ map กับหัวข้อของหน้า */
+.price-row-own td {
+  background: #f2f7fc;
+  font-weight: 600;
+}
+
+.price-row-own td:first-child {
+  box-shadow: inset 4px 0 0 var(--accent-blue);
+}
+
+.price-table tfoot td {
+  border-top: 2px solid var(--secondary);
+  background: #f7f9fb;
+  font-weight: 700;
+  text-align: right;
+}
+
+.price-notes {
+  margin-top: 0.9rem;
+}
+
+.price-notes p {
+  margin: 0 0 0.25rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: #8a94a0;
 }
 
 .attachments {
