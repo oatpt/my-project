@@ -111,6 +111,13 @@
   color: var(--secondary);
 }
 
+/* หน่วยของราคาที่ไม่ได้คิดเป็นชุด เช่น "94 / เมตร" — เบากว่าตัวเลขเพื่อให้ตัวเลขยังเด่น */
+.price-unit {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #8a94a0;
+}
+
 .price-page-notes {
   margin-top: 1.5rem;
 }

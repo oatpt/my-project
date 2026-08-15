@@ -20,8 +20,9 @@ function App() {
     // For now, we'll use the sample data
     const fetchData = async () => {
       try {
-        productsData.sort((a, b) => a.name.localeCompare(b.name));
-        setProducts(productsData);
+        // เรียงจากสำเนา ไม่ใช่ตัว productsData เอง — ที่อื่นยังต้องใช้ลำดับตามไฟล์อยู่
+        // (หน้าราคาเรียงรายการที่ตั้งราคาเองตามลำดับใน products.json)
+        setProducts([...productsData].sort((a, b) => a.name.localeCompare(b.name)));
         setLoading(false);
       } catch (error) {
         console.error('Error fetching product data:', error);

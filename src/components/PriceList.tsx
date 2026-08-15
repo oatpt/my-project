@@ -7,9 +7,14 @@
 // (จอ video wall, ตัวควบคุมจอ, โต๊ะ, เก้าอี้, งานปรับปรุงห้อง War Room) ไม่ขึ้นในตาราง
 // ทุกแถวใช้ชื่ออังกฤษจากเอกสาร word เป็นชื่อหลัก มีชื่อไทยกำกับ และกดไปหน้ารายละเอียดได้
 // คอลัมน์มีแค่ ลำดับ / รายการ / ราคาต่อหน่วย
+//
+// สินค้าบางตัวไม่ได้อยู่ในใบเสนอราคา .xlsx ใบไหน (ชุดเสียงตามสาย และชุดจอแสดงผล)
+// ราคาของพวกนี้เขียนไว้ในเอกสาร word ของตัวเอง จึงเก็บไว้ที่ "price" ใน products.json
+// แล้วต่อท้ายตาราง — กติกาเดิมไม่เปลี่ยน คือทุกแถวต้องเป็นสินค้าที่มีหน้าของตัวเอง
 
 import { Link } from 'react-router-dom';
 import { Product, QuotationIndex } from '../types';
+import productsData from '../data/products.json';
 import quotationsData from '../data/quotations.json';
 import './PriceList.css';
 
@@ -29,6 +34,8 @@ interface PriceRow {
     link: string;
     /** ราคาต่อหน่วย (บาท) */
     price: number;
+    /** หน่วยของราคา ถ้าไม่ได้คิดเป็นชุด เช่น "เมตร" */
+    priceUnit?: string;
 }
 
 const money = (value: number): string => value.toLocaleString('en-US');
@@ -36,6 +43,7 @@ const money = (value: number): string => value.toLocaleString('en-US');
 /**
  * รวมรายการพื้นขาวจากใบเสนอราคาทุกโครงการเป็นรายการเดียว เรียงตามลำดับในไฟล์
  * เอาเฉพาะรายการที่ map กับสินค้า (quotationItem) — ใช้ชื่อจากเว็บและลิงก์ไปหน้าสินค้า
+ * แล้วต่อท้ายด้วยสินค้าที่ตั้งราคาไว้เองใน products.json เรียงตามลำดับในไฟล์นั้น
  */
 const buildRows = (products: Product[]): PriceRow[] => {
     const productOfItem = new Map(
@@ -60,6 +68,20 @@ const buildRows = (products: Product[]): PriceRow[] => {
             });
         }
     }
+
+    // ไล่จาก products.json ตรง ๆ ไม่ใช่ props เพราะหน้าแรกส่งลำดับที่เรียงตามชื่อมาให้
+    // ส่วนตรงนี้อยากได้ลำดับตามที่เขียนไว้ในไฟล์ ซึ่งเรียงตามเอกสาร word ต้นฉบับ
+    for (const product of productsData as Product[]) {
+        if (product.price === undefined) continue;
+        rows.push({
+            name: product.name,
+            thaiName: product.thaiName,
+            link: `/product-details/${product.id}`,
+            price: product.price,
+            priceUnit: product.priceUnit,
+        });
+    }
+
     return rows;
 };
 
@@ -105,7 +127,12 @@ const PriceList = ({ products, loading }: PriceListProps) => {
                                 </Link>
                                 {row.thaiName && <span className="price-name-thai">{row.thaiName}</span>}
                             </span>
-                            <span className="price-col-amount">{money(row.price)}</span>
+                            <span className="price-col-amount">
+                                {money(row.price)}
+                                {row.priceUnit && (
+                                    <span className="price-unit"> / {row.priceUnit}</span>
+                                )}
+                            </span>
                         </div>
                     ))}
                 </div>

@@ -132,6 +132,13 @@ export interface Product {
   quotation?: string;
   /** ชื่อรายการของสินค้านี้ในตารางราคา (ตรงกับ name ของ item ใน quotations.json) */
   quotationItem?: string;
+  /**
+   * ราคาต่อหน่วย (บาท) สำหรับสินค้าที่ไม่ได้อยู่ในใบเสนอราคา .xlsx ใบไหน
+   * — ราคามาจากเอกสาร word ของสินค้านั้นโดยตรง
+   */
+  price?: number;
+  /** หน่วยของราคา ถ้าไม่ได้คิดเป็นชุด เช่น "เมตร" */
+  priceUnit?: string;
   attachments?: Attachment[];
   description: string;
   feature: Productlist[];
