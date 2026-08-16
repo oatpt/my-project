@@ -137,8 +137,6 @@ export interface Product {
    * — ราคามาจากเอกสาร word ของสินค้านั้นโดยตรง
    */
   price?: number;
-  /** หน่วยของราคา ถ้าไม่ได้คิดเป็นชุด เช่น "เมตร" */
-  priceUnit?: string;
   attachments?: Attachment[];
   description: string;
   feature: Productlist[];

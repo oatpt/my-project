@@ -34,8 +34,6 @@ interface PriceRow {
     link: string;
     /** ราคาต่อหน่วย (บาท) */
     price: number;
-    /** หน่วยของราคา ถ้าไม่ได้คิดเป็นชุด เช่น "เมตร" */
-    priceUnit?: string;
 }
 
 const money = (value: number): string => value.toLocaleString('en-US');
@@ -78,7 +76,6 @@ const buildRows = (products: Product[]): PriceRow[] => {
             thaiName: product.thaiName,
             link: `/product-details/${product.id}`,
             price: product.price,
-            priceUnit: product.priceUnit,
         });
     }
 
@@ -127,12 +124,7 @@ const PriceList = ({ products, loading }: PriceListProps) => {
                                 </Link>
                                 {row.thaiName && <span className="price-name-thai">{row.thaiName}</span>}
                             </span>
-                            <span className="price-col-amount">
-                                {money(row.price)}
-                                {row.priceUnit && (
-                                    <span className="price-unit"> / {row.priceUnit}</span>
-                                )}
-                            </span>
+                            <span className="price-col-amount">{money(row.price)}</span>
                         </div>
                     ))}
                 </div>
