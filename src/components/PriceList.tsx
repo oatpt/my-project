@@ -130,7 +130,6 @@ const PriceList = ({ products, loading }: PriceListProps) => {
 
                 <div className="price-page-notes">
                     <p>ราคาข้างต้นเป็นราคาต่อหน่วย รวมภาษีมูลค่าเพิ่ม (VAT 7%) แล้ว</p>
-                    <p>สำหรับใบเสนอราคาอย่างเป็นทางการ กรุณาติดต่อบริษัท</p>
                 </div>
             </section>
         </>
