@@ -83,7 +83,7 @@ public/files/mediasphere/
 |---|---|---|---|
 | `ใบเสนอราคา_ระบบประชาสัมพันธ์` | 6 | 8,741,000 | Central Digital Media Management System, Multimedia Distribution Platform, Public Display Management Platform, Central User & Communication System |
 | `ใบเสนอราคา_Smart Thatoom Super App` | 6 | 9,525,000 | IdentiCore, LinkFrame, SignalWave, CivicHub |
-| `ใบเสนอราคา_War Room` | 11 | 4,909,000 | Urban Data Management and Analytics Platform |
+| `ใบเสนอราคา_War Room` | 11 | 4,909,000 | Modular Video Wall Display, Multi-Screen Display Controller, Urban Data Management and Analytics Platform, โต๊ะคอมพิวเตอร์ รุ่น Standard-120, เก้าอี้ทำงาน รุ่น Standard-Ergo, Room Improvement and Building Services |
 | `ใบเสนอราคา_City Data Platform` | 9 | 10,365,000 | Central Data Management Platform, Spatial Information Platform, Data Integration Gateway, Data Insight Center |
 
 `_quotations` ไม่ใช่โฟลเดอร์ของสินค้าตัวไหน จึงไม่ถูกสแกนขึ้นเอง แต่ละสินค้าชี้มาผ่าน
@@ -112,13 +112,12 @@ npm run quotations
 
 - เอาเฉพาะ**รายการพื้นขาว**ในไฟล์ excel — แถวราคากลาง ICT ที่ระบายสีเขียวถูกข้าม
 - คอลัมน์มีแค่ ลำดับ / รายการ / ราคาต่อหน่วย ไม่มีราคารวม
-- ทุกแถวเป็นระบบของเว็บ ใช้**ชื่ออังกฤษจากเอกสาร word** เป็นชื่อหลัก
-  มี**ชื่อไทย**กำกับ (ค่า `"thaiName"` ใน `products.json`) และกดไปหน้าสินค้าได้
+- ทุกแถวต้องเป็นสินค้าที่**มีหน้าของตัวเอง** ใช้**ชื่ออังกฤษจากเอกสาร word** เป็นชื่อหลัก
+  ถ้าเอกสารมี มี**ชื่อไทย**กำกับ (ค่า `"thaiName"` ใน `products.json`) และกดไปหน้าสินค้าได้
   การจับคู่รายการ↔สินค้าใช้ค่า `"quotationItem"` (ต้องตรงกับ `name` ของรายการใน
   `quotations.json` ทุกตัวอักษร)
-- รายการพื้นขาวที่ไม่ใช่ระบบ (จอ Video Wall ตัวควบคุมจอ โต๊ะ เก้าอี้ และงานปรับปรุงห้อง
-  ของโครงการ War Room) **ไม่ขึ้นในตาราง** — รายการที่ไม่ match `quotationItem` ของสินค้า
-  ไหนเลยจะถูกข้าม
+- **รายการที่ไม่ match `quotationItem` ของสินค้าไหนเลยจะถูกข้าม** ไม่ขึ้นในตาราง
+  อยากให้รายการไหนขึ้น ต้องทำหน้าสินค้าให้มันก่อน แล้วใส่ `"quotationItem"` ชี้มา
 - แก้ราคาที่ไฟล์ `.xlsx` ใน `quotations-source/` แล้ว build ใหม่ ราคาบนเว็บเปลี่ยนตาม
 
 #### สินค้าที่ไม่ได้อยู่ในใบเสนอราคา `.xlsx`
@@ -130,6 +129,9 @@ npm run quotations
 |---|---|
 | `ProTech - เสียงตามสาย Rev 3.docx` | ชุดกระจายสัญญาณใยแก้วนำแสงส่วนกลาง, ชุดเชื่อมต่อโครงข่ายใยแก้วนำแสงภาคสนาม, ชุดรับและขยายสัญญาณเสียงผ่านเครือข่าย, ชุดลำโพงฮอร์นสำหรับพื้นที่ภายนอก, ตู้ติดตั้งอุปกรณ์ภาคสนาม, สายใยแก้วนำแสงสำหรับติดตั้งภายนอก |
 | `ProTech_-_จอแสดงผล_แก้ไขตามTOR.docx` | LumaGrid, PixelCore, ScoreEngine, FiberLink, PowerGuard, FrameWorks |
+
+(`Protech_Warroom_2.docx` ไม่ต้องใช้ `"price"` เพราะทั้ง 5 รายการในนั้นมีราคาอยู่ใน
+`ใบเสนอราคา_War Room` อยู่แล้ว ผูกด้วย `"quotationItem"` ตามปกติ)
 
 ชุดเสียงตามสายในเอกสารไม่มีชื่ออังกฤษกับหัวข้อ "จุดเด่น" จึงใช้ชื่อไทยเป็นชื่อหลัก
 และมีแต่หัวข้อ "Specification" ตามที่เอกสารเขียนไว้ (Rev 3 ตัดจำนวนชุดออกจากทุกรายการ
